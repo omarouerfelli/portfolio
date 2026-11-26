@@ -185,10 +185,17 @@ nav,header{border-bottom:2px solid #edbb0066}
 footer{border-top:7px solid transparent;border-image:repeating-linear-gradient(90deg,#004d98 0 36px,#a50044 36px 72px) 7}
 .marq span:nth-child(3n+1){color:#edbb00}.marq span:nth-child(3n+2){color:#7aa8ff}.marq span:nth-child(3n){color:#ff6b9c}
 .kicker{background:linear-gradient(90deg,#004d98,#a50044)!important;color:#fff!important;border:1px solid #edbb00!important;border-radius:999px!important;padding:7px 16px!important}
+.stripes::after{background:linear-gradient(180deg,#050a2470,#050a24c4 60%,#050a24ea)}
+.pitch{position:fixed;inset:0;z-index:-3;pointer-events:none;background:radial-gradient(circle at 50% 50%,transparent 0 150px,#ffffff22 151px 155px,transparent 156px),linear-gradient(90deg,transparent calc(50% - 2px),#ffffff1c calc(50% - 2px) calc(50% + 2px),transparent calc(50% + 2px))}
+.mega{position:fixed;left:-1vw;bottom:-3vw;z-index:-2;font:900 17vw/1 Inter,sans-serif;color:transparent;-webkit-text-stroke:2px #edbb0040;white-space:nowrap;pointer-events:none;letter-spacing:-.04em}
+.fan{position:fixed;right:18px;bottom:18px;z-index:150;border:2px solid #edbb00;background:linear-gradient(90deg,#004d98,#a50044);color:#fff;font:800 15px Inter,sans-serif;padding:13px 20px;border-radius:999px;cursor:pointer;box-shadow:0 10px 30px #a5004488;transition:transform .2s}.fan:hover{transform:scale(1.07) rotate(-2deg)}
+.vis{background:linear-gradient(90deg,#004d98,#a50044,#004d98);border-block:3px solid #edbb00;padding:16px 0;mask-image:none;-webkit-mask-image:none}
+.vis span{font-size:36px;font-weight:900;letter-spacing:.05em;color:#edbb00}.vis span:nth-child(even){color:#fff}.vis span::after{background:#fff}
+.cf{position:fixed;z-index:300;width:10px;height:16px;pointer-events:none;border-radius:2px}
 </style>
 </head>
 <body>
-<div class="stripes"></div><div class="aurora"></div><canvas id="net" aria-hidden="true"></canvas><div class="grain"></div><div id="glow"></div><div id="wipe"></div>
+<div class="stripes"></div><div class="pitch"></div><div class="mega">VISCA BARÇA</div><div class="aurora"></div><canvas id="net" aria-hidden="true"></canvas><div class="grain"></div><div id="glow"></div><div id="wipe"></div>
 
 <nav><div class="in">
 <a class="logo" href="#accueil"><i></i><span>Omar Ouerfelli</span></a>
@@ -340,6 +347,7 @@ footer{border-top:7px solid transparent;border-image:repeating-linear-gradient(9
 </section>
 </main>
 
+<div class="marq vis" aria-hidden="true"><div><span>VISCA EL BARÇA</span><span>MÉS QUE UN CLUB</span><span>FORÇA BARÇA</span><span>BLAUGRANA</span><span>VISCA CATALUNYA</span><span>VISCA EL BARÇA</span><span>MÉS QUE UN CLUB</span><span>FORÇA BARÇA</span><span>BLAUGRANA</span><span>VISCA CATALUNYA</span></div></div>
 <footer class="band" style="padding-block:48px 28px"><div class="wrap">
 <div><a class="logo" href="#accueil"><i></i>Omar Ouerfelli</a><p class="mute" style="margin-top:12px">Portfolio professionnel · BTS SIO option SISR</p></div>
 <div class="fl"><b>Contact</b><span class="mute">hello@it-portfolio.fr</span><span class="mute">Paris, France</span></div>
@@ -518,6 +526,11 @@ const ro=new ResizeObserver(draw);ro.observe(s);
 show();
 if(document.fonts)document.fonts.ready.then(()=>{const a=links.find(x=>x.hasAttribute('aria-current'));if(a)movePill(a)});
 }
+;{const RMq=matchMedia('(prefers-reduced-motion:reduce)').matches;const cols=['#004d98','#a50044','#edbb00','#ffffff'];
+const boom=(x,y)=>{if(RMq)return;for(let i=0;i<90;i++){const d=document.createElement('i');d.className='cf';d.style.background=cols[i%4];d.style.left=x+'px';d.style.top=y+'px';document.body.appendChild(d);const a=Math.random()*Math.PI*2,v=150+Math.random()*420;d.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${Math.cos(a)*v}px,${Math.sin(a)*v+260}px) rotate(${Math.random()*900}deg)`,opacity:0}],{duration:1400+Math.random()*900,easing:'cubic-bezier(.2,.7,.3,1)'}).onfinish=()=>d.remove()}};
+const f=document.getElementById('fan');if(f)f.addEventListener('click',e=>{const r=f.getBoundingClientRect();boom(r.left+r.width/2,r.top);boom(innerWidth/2,innerHeight/3)});
+document.addEventListener('click',e=>{if(e.target.closest('.logo,.btn'))boom(e.clientX,e.clientY)})}
 </script>
+<button class="fan" id="fan">⚽ Visca el Barça !</button>
 </body>
 </html>

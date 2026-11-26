@@ -316,16 +316,16 @@ footer a{text-decoration:none}footer a:hover{color:var(--cyan)}
 <!-- ================= VEILLE TECH ================= -->
 <section class="view" id="v-veille-tech">
 <div class="band ph"><div class="wrap g2" style="align-items:center">
-<div><span class="kicker rv">Focus cybersécurité</span>
+<div><span class="kicker rv">Veille · Accès distants & ransomware</span>
 <h1 class="rv grad" style="--i:1">Veille Tech</h1>
-<p class="lead rv" style="--i:2">Protéger les données d'une entreprise face aux menaces numériques est le défi qui m'intéresse le plus. Je m'entraîne sur des CTF et des labs, et je suis l'actualité par des articles et des vidéos pour comprendre les mécanismes d'attaque et de défense.</p></div>
+<p class="lead rv" style="--i:2">Mon sujet de veille est précis : la sécurisation des accès distants (VPN), devenus la première porte d'entrée des attaques par rançongiciel. Je suis l'actualité de l'ANSSI, du CERT-FR, de Bitdefender et de BleepingComputer pour comprendre les failles exploitées et les parades à mettre en place côté infrastructure.</p></div>
 <div class="radar rv" style="--i:2" aria-hidden="true">
 <span class="blip" style="left:28%;top:30%;--c:var(--red);--t:.4s"></span><span class="blip" style="left:74%;top:36%;--c:var(--amber);--t:1.1s"></span><span class="blip" style="left:66%;top:76%;--c:var(--green);--t:1.9s"></span><span class="blip" style="left:22%;top:68%;--c:var(--cyan);--t:2.6s"></span>
 <div class="lock"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
 </div>
 </div></div>
 <div class="band" style="padding-top:0"><div class="wrap">
-<h2 class="rv" style="margin-bottom:26px">Ma veille technique</h2>
+<h2 class="rv" style="margin-bottom:26px">Sujet suivi : les VPN, porte d'entrée des ransomwares</h2>
 <div class="g3" id="veille"></div>
 </div></div>
 </section>
@@ -369,12 +369,12 @@ const PROJETS=[
 {id:'dns',t:'Config DNS Linux',d:"Administration de Debian : configuration d'Apache, du DNS et de serveurs mail sécurisés.",g:'linux'},
 {id:'dock',t:'Conteneurisation',d:'Conteneurisation des applications et automatisation des déploiements pour optimiser la production.',g:'dock',soon:true}];
 const VEILLE=[
-{t:'Bases de failles',d:'Je consulte régulièrement les registres CVE et la NVD pour repérer les vulnérabilités logicielles critiques.',c:'var(--red)',i:'<path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17h.01"/>',s:[['CVE','https://www.cve.org/'],['NVD','https://nvd.nist.gov/']]},
-{t:'Sources officielles',d:"Je suis les alertes de l'ANSSI et du CERT-FR pour connaître les menaces et les recommandations majeures.",c:'var(--blue)',i:'<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/>',s:[['ANSSI','https://cyber.gouv.fr/'],['CERT-FR','https://www.cert.ssi.gouv.fr/']]},
-{t:'Actualité infosec',d:"Pour l'actualité quotidienne, je lis Zataz, BleepingComputer et The Hacker News.",c:'var(--amber)',i:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h10M7 17h6"/>',s:[['Zataz','https://www.zataz.com/'],['BleepingComputer','https://www.bleepingcomputer.com/'],['The Hacker News','https://thehackernews.com/']]},
-{t:'Outils de veille',d:'Flux RSS avec Feedly, comptes spécialisés sur X et newsletters techniques.',c:'var(--green)',i:'<path d="M5 19a1 1 0 1 0 0-.01M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/>',s:[['Feedly','https://feedly.com/']]},
-{t:"Guides de l'ANSSI",d:"Les guides de bonnes pratiques et le guide d'hygiène informatique sont au cœur de ma démarche de sécurisation.",c:'var(--cyan)',i:'<path d="M4 4h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4zM20 4h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6z"/>',s:[["Guide d'hygiène",'https://cyber.gouv.fr/publications/guide-dhygiene-informatique']]},
-{t:'Entraînement',d:"CTF et labs pour pratiquer l'attaque et la défense dans un cadre légal et contrôlé.",c:'var(--red)',i:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',s:[]}];
+{t:'Le sujet',d:"Les accès distants (VPN) sont devenus la première porte d'entrée des rançongiciels. Je suis ce thème car il touche directement mon option SISR : flux, pare-feux et administration réseau.",c:'var(--cyan)',i:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',s:[]},
+{t:"Les VPN, porte d'entrée",d:"En 2025, près d'une attaque par rançongiciel sur trois a débuté via un accès VPN exposé (équipements SonicWall en tête), et les attaques ciblant les VPN ont presque doublé.",c:'var(--red)',i:'<path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17h.01"/>',s:[['BleepingComputer','https://www.bleepingcomputer.com/']]},
+{t:'La France très ciblée',d:"Au 1er semestre 2026, 131 organisations françaises ont été recensées comme victimes de rançongiciel : la France est au 6e rang mondial des pays visés (Bitdefender).",c:'var(--amber)',i:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h10M7 17h6"/>',s:[['Clubic / Bitdefender','https://www.clubic.com/actualite-626584-cp-bitdefender-ransomware.html']]},
+{t:'La double extorsion',d:"Les attaquants volent les données avant de les chiffrer : si la rançon n'est pas payée, elles sont publiées sur le dark web. La sauvegarde seule ne suffit donc plus.",c:'var(--blue)',i:'<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/>',s:[['CERT-FR','https://www.cert.ssi.gouv.fr/']]},
+{t:'Les parades (SISR)',d:"MFA sur les accès VPN, mises à jour régulières des équipements exposés, segmentation du réseau et logique Zero Trust : les défenses sont pile dans mon domaine.",c:'var(--green)',i:'<circle cx="9" cy="14" r="4"/><path d="M12 11l8-8M18 5l2 2"/>',s:[["Guide d'hygiène ANSSI",'https://cyber.gouv.fr/publications/guide-dhygiene-informatique']]},
+{t:'Sources suivies',d:"Je suis en continu l'ANSSI et le CERT-FR pour les alertes officielles (failles VPN notamment), et Bitdefender, Zataz et BleepingComputer pour l'actualité des groupes de rançongiciels.",c:'var(--cyan)',i:'<path d="M5 19a1 1 0 1 0 0-.01M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/>',s:[['ANSSI','https://cyber.gouv.fr/'],['CERT-FR','https://www.cert.ssi.gouv.fr/'],['Bitdefender','https://www.bitdefender.fr/']]}];
 
 /* ================= Illustrations animées ================= */
 const T='#e8f0ff',B='#3b82ff',C='#22d3ee',A='#ffb400',Gn='#2ee59d',D='#1b2a4a';

@@ -182,6 +182,9 @@ body::before{content:"";position:fixed;left:0;right:0;top:0;height:7px;z-index:2
 nav,header{border-bottom:2px solid #edbb0066}
 .btn:not(.ghost){background:linear-gradient(90deg,#004d98,#a50044)!important;box-shadow:0 8px 28px #a5004466!important}
 .card:hover{border-color:#edbb00aa!important}
+footer{border-top:7px solid transparent;border-image:repeating-linear-gradient(90deg,#004d98 0 36px,#a50044 36px 72px) 7}
+.marq span:nth-child(3n+1){color:#edbb00}.marq span:nth-child(3n+2){color:#7aa8ff}.marq span:nth-child(3n){color:#ff6b9c}
+.kicker{background:linear-gradient(90deg,#004d98,#a50044)!important;color:#fff!important;border:1px solid #edbb00!important;border-radius:999px!important;padding:7px 16px!important}
 </style>
 </head>
 <body>
@@ -198,7 +201,7 @@ nav,header{border-bottom:2px solid #edbb0066}
 <section class="view" id="v-accueil">
 <div class="band"><div class="wrap hero">
 <div>
-<span class="kicker rv">BTS SIO · option SISR · en alternance</span>
+<span class="kicker rv">Visca el Barça · BTS SIO SISR · alternance</span>
 <h1 class="name" id="name" aria-label="Omar Ouerfelli">Omar Ouerfelli</h1>
 <p class="role rv" style="--i:2"><span class="grad" style="font-weight:800">Portfolio Informatique</span> · <b id="type"></b><span class="caret"></span></p>
 <p class="lead rv" style="--i:3">Étudiant en BTS SIO option SISR, spécialisé dans l'administration des systèmes et réseaux, avec un intérêt marqué pour la cybersécurité.</p>
@@ -342,7 +345,7 @@ nav,header{border-bottom:2px solid #edbb0066}
 <div class="fl"><b>Contact</b><span class="mute">hello@it-portfolio.fr</span><span class="mute">Paris, France</span></div>
 <div class="fl"><b>Réseaux</b><a class="mute" href="https://www.linkedin.com/">LinkedIn</a><a class="mute" href="https://www.instagram.com/">Instagram</a></div>
 </div>
-<div class="copy"><span>© 2026 Portfolio Professionnel. Tous droits réservés.</span><span>Conçu avec passion pour l'innovation</span></div>
+<div class="copy"><span>© 2026 Portfolio Professionnel. Tous droits réservés.</span><span>Visca el Barça · Més que un club · Fundat el 1899</span></div>
 </footer>
 
 <script>
@@ -354,12 +357,13 @@ const $=id=>document.getElementById(id);
 /* ================= Contenu (tout le texte à modifier est ici) ================= */
 const WIX='https://omarouerfelli2021.wixsite.com/portfolio-profession/ateliers-pro';
 const ROLES=['Administration systèmes','Réseaux & infrastructures','Cybersécurité','Windows Server & Linux'];
-const STACK=['Debian','Windows Server','Active Directory','pfSense','DNS','DHCP','GPO','Apache','VLAN','Docker','HubSpot','Virtualisation'];
+const STACK=['Visca el Barça','Debian','Més que un club','Windows Server','Active Directory','pfSense','DNS','DHCP','GPO','Apache','VLAN','Docker','Força Barça','HubSpot','Virtualisation','Blaugrana'];
 const STATS=[[6,'ateliers techniques'],[4,'projets professionnels'],[2,"ans d'alternance"],[5,'axes de veille']];
 const TERM=[
 ['omar@lab:~$ ','ping -c 2 10.0.10.1',['64 bytes from 10.0.10.1: icmp_seq=1 ttl=64 time=0.41 ms','64 bytes from 10.0.10.1: icmp_seq=2 ttl=64 time=0.38 ms']],
 ['omar@lab:~$ ','sudo systemctl status bind9',['<span class="ok">●</span> named.service - BIND Domain Name Server','   Active: <span class="ok">active (running)</span>']],
 ['omar@lab:~$ ','dig +short srv-ad01.lab.local',['10.0.10.10']],
+['omar@camp-nou:~$ ','echo "Visca el Barça"',['Visca el Barça ! Visca Catalunya !']],
 ['PS C:\\> ','Get-ADUser -Filter * | Measure-Object',['Count : 42']],
 ['omar@lab:~$ ','sudo apt update && sudo apt upgrade -y',['Lecture des listes de paquets... Fait','0 mis à jour, 0 nouvellement installés.']]];
 const ATELIERS=[

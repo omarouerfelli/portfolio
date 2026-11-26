@@ -10,10 +10,10 @@
 /* VOICE portfolio SISR qui en met plein la vue, comme un centre d'opérations réseau
    IDEA un NOC la nuit : le fond est un réseau vivant, des paquets circulent, un terminal tourne
    PICTURE canvas plein écran de nœuds connectés qui réagit à la souris + terminal animé + plan du lab
-   COLOUR nuit #060a13, bleu électrique #3b82ff, cyan #22d3ee, ambre #ffb400 pour l'accent, verre sombre
+   COLOUR nuit #050a24, bleu électrique #2e6fd6, cyan #edbb00, ambre #f5c400 pour l'accent, verre sombre
    TYPE Figtree 900 + Figtree, JetBrains Mono pour le terminal
    LAYOUT 5 onglets Wix ; héros nom + rôle tapé à gauche, terminal à droite ; sections en verre ; téléphone : tout empilé */
-:root{color-scheme:dark;--bg:#060a13;--ink:#eef3ff;--mute:#9aa7c2;--line:#ffffff1a;--glass:#0c1426e0;--blue:#3b82ff;--cyan:#22d3ee;--amber:#ffb400;--red:#ff5a5f;--green:#2ee59d}
+:root{color-scheme:dark;--bg:#050a24;--ink:#eef3ff;--mute:#9aa7c2;--line:#ffffff1a;--glass:#0b1240e0;--blue:#2e6fd6;--cyan:#edbb00;--amber:#f5c400;--red:#d6104a;--green:#c2185b}
 *{box-sizing:border-box;min-width:0}
 html{scroll-padding-top:80px;background:var(--bg)}
 body{margin:0;background:transparent;color:var(--ink);font:16px/1.6 Figtree,system-ui,sans-serif;overflow-x:clip}
@@ -26,25 +26,25 @@ p{margin:0}
 .mono{font-family:"JetBrains Mono",monospace}
 /* fond */
 #net{position:fixed;inset:0;width:100%;height:100%;z-index:-2}
-.aurora{position:fixed;inset:-20%;z-index:-3;pointer-events:none;animation:drift 22s ease-in-out infinite alternate;background:radial-gradient(40% 35% at 20% 25%,#1d4ed855,transparent 70%),radial-gradient(35% 30% at 80% 20%,#0e749044,transparent 70%),radial-gradient(45% 40% at 60% 85%,#1e3a8a55,transparent 70%)}
+.aurora{position:fixed;inset:-20%;z-index:-3;pointer-events:none;animation:drift 22s ease-in-out infinite alternate;background:radial-gradient(40% 35% at 20% 25%,#a5004455,transparent 70%),radial-gradient(35% 30% at 80% 20%,#004d9877,transparent 70%),radial-gradient(45% 40% at 60% 85%,#004d9855,transparent 70%)}
 @keyframes drift{to{transform:translate3d(6%,-4%,0) rotate(8deg) scale(1.1)}}
 .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(transparent 0 calc(100% - 1px),#ffffff08 0) 0 0/100% 40px,linear-gradient(90deg,transparent 0 calc(100% - 1px),#ffffff08 0) 0 0/40px 100%;mask-image:radial-gradient(70% 60% at 50% 40%,#000,transparent)}
-#glow{position:fixed;width:520px;height:520px;left:0;top:0;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(#3b82ff22,transparent 65%);pointer-events:none;z-index:-1;transition:opacity .3s;opacity:0}
+#glow{position:fixed;width:520px;height:520px;left:0;top:0;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(#2e6fd622,transparent 65%);pointer-events:none;z-index:-1;transition:opacity .3s;opacity:0}
 /* nav */
-nav{position:sticky;top:12px;z-index:20;margin:12px max(4vw,12px) 0;border:1px solid var(--line);border-radius:18px;background:#08101fcc;backdrop-filter:blur(14px);padding:0 14px}
+nav{position:sticky;top:12px;z-index:20;margin:12px max(4vw,12px) 0;border:1px solid var(--line);border-radius:18px;background:#0a1238cc;backdrop-filter:blur(14px);padding:0 14px}
 nav .in{display:flex;align-items:center;gap:14px;min-height:62px;max-width:1240px;margin:0 auto}
 .logo{font-weight:900;font-size:18px;text-decoration:none;display:flex;align-items:center;gap:10px;flex:none}
 .logo i{width:30px;height:30px;border-radius:9px;background:conic-gradient(from var(--a,0deg),var(--blue),var(--cyan),var(--amber),var(--blue));display:grid;place-items:center;animation:spin 6s linear infinite}
-.logo i::after{content:"OO";font:900 11px Figtree;color:#fff;background:#08101f;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-style:normal}
+.logo i::after{content:"OO";font:900 11px Figtree;color:#fff;background:#0a1238;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-style:normal}
 @property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
 @keyframes spin{to{--a:360deg}}
 .tabs{display:flex;gap:2px;overflow-x:auto;margin-left:auto;scrollbar-width:none;position:relative;padding:6px 0}
 .tabs a{flex:none;position:relative;z-index:1;text-decoration:none;font-weight:600;font-size:15px;padding:10px 14px;color:var(--mute);border-radius:12px;transition:color .25s}
 .tabs a:hover,.tabs a[aria-current=page]{color:#fff}
-.pillbg{position:absolute;top:6px;bottom:6px;border-radius:12px;background:linear-gradient(135deg,#3b82ff,#22d3ee);box-shadow:0 6px 24px -6px #3b82ffaa;transition:left .45s cubic-bezier(.3,1.3,.4,1),width .45s cubic-bezier(.3,1.3,.4,1)}
+.pillbg{position:absolute;top:6px;bottom:6px;border-radius:12px;background:linear-gradient(135deg,#2e6fd6,#edbb00);box-shadow:0 6px 24px -6px #2e6fd6aa;transition:left .45s cubic-bezier(.3,1.3,.4,1),width .45s cubic-bezier(.3,1.3,.4,1)}
 a:focus-visible,button:focus-visible,.st:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
 /* transitions */
-#wipe{position:fixed;inset:0;z-index:30;pointer-events:none;background:linear-gradient(90deg,transparent,#22d3ee 48%,#fff 50%,#3b82ff 52%,transparent);transform:translateX(-100%);opacity:0}
+#wipe{position:fixed;inset:0;z-index:30;pointer-events:none;background:linear-gradient(90deg,transparent,#edbb00 48%,#fff 50%,#2e6fd6 52%,transparent);transform:translateX(-100%);opacity:0}
 #wipe.go{animation:wipe .7s cubic-bezier(.6,0,.3,1)}
 @keyframes wipe{0%{opacity:1;transform:translateX(-100%) skewX(-12deg)}100%{opacity:1;transform:translateX(100%) skewX(-12deg)}}
 .view{display:none}
@@ -56,9 +56,9 @@ a:focus-visible,button:focus-visible,.st:focus-visible,[tabindex]:focus-visible{
 .wrap{max-width:1240px;margin:0 auto}
 .glass{background:var(--glass);border:1px solid var(--line);border-radius:22px;backdrop-filter:blur(10px)}
 .kicker{display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--cyan);font-size:15px}
-.kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 #2ee59d;animation:ping 2s infinite}
-@keyframes ping{70%{box-shadow:0 0 0 10px #2ee59d00}100%{box-shadow:0 0 0 0 #2ee59d00}}
-.grad{background:linear-gradient(100deg,#fff 20%,#9cc2ff 40%,#22d3ee 55%,#fff 75%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+.kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 #c2185b;animation:ping 2s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 10px #c2185b00}100%{box-shadow:0 0 0 0 #c2185b00}}
+.grad{background:linear-gradient(100deg,#fff 20%,#ffd84a 40%,#edbb00 55%,#fff 75%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
 @keyframes shine{to{background-position:-250% 0}}
 /* héros */
 .hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:center;padding-top:clamp(0px,3vw,40px)}
@@ -71,19 +71,19 @@ a:focus-visible,button:focus-visible,.st:focus-visible,[tabindex]:focus-visible{
 @keyframes blink{50%{opacity:0}}
 .lead{font-size:18px;color:var(--mute);max-width:58ch;margin-top:18px}
 .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.btn{position:relative;display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:12px 22px;border-radius:14px;font:700 15px Figtree,sans-serif;text-decoration:none;border:0;cursor:pointer;color:#fff;background:linear-gradient(135deg,#3b82ff,#1d4ed8);box-shadow:0 10px 30px -10px #3b82ffcc,inset 0 1px 0 #ffffff33;transition:box-shadow .3s;will-change:transform}
-.btn:hover{box-shadow:0 16px 40px -10px #22d3eecc,inset 0 1px 0 #ffffff55}
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:12px 22px;border-radius:14px;font:700 15px Figtree,sans-serif;text-decoration:none;border:0;cursor:pointer;color:#fff;background:linear-gradient(135deg,#2e6fd6,#a50044);box-shadow:0 10px 30px -10px #2e6fd6cc,inset 0 1px 0 #ffffff33;transition:box-shadow .3s;will-change:transform}
+.btn:hover{box-shadow:0 16px 40px -10px #edbb00cc,inset 0 1px 0 #ffffff55}
 .btn.ghost{background:#ffffff0d;box-shadow:inset 0 0 0 1px var(--line)}
-.btn.ghost:hover{box-shadow:inset 0 0 0 1px var(--cyan),0 10px 30px -14px #22d3ee}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1px var(--cyan),0 10px 30px -14px #edbb00}
 .btn svg{width:16px;height:16px;flex:none}
-.term{overflow:hidden;box-shadow:0 40px 80px -30px #000,0 0 0 1px #ffffff12,0 0 60px -20px #3b82ff88}
+.term{overflow:hidden;box-shadow:0 40px 80px -30px #000,0 0 0 1px #ffffff12,0 0 60px -20px #2e6fd688}
 .term .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--mute)}
 .term .bar i{width:12px;height:12px;border-radius:50%}
 .term pre{margin:0;padding:18px 18px 22px;font:14px/1.75 "JetBrains Mono",monospace;height:330px;overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere;color:#cfe0ff}
 .term .p{color:var(--green)}.term .o{color:#7f8db0}.term .ok{color:var(--cyan)}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:8px}
 .stat{padding:22px}
-.stat b{display:block;font-size:clamp(34px,4vw,52px);font-weight:900;line-height:1;background:linear-gradient(180deg,#fff,#7fb0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat b{display:block;font-size:clamp(34px,4vw,52px);font-weight:900;line-height:1;background:linear-gradient(180deg,#fff,#f5c400);-webkit-background-clip:text;background-clip:text;color:transparent}
 .stat span{color:var(--mute);font-size:15px}
 .marq{overflow:hidden;border-block:1px solid var(--line);padding:18px 0;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
 .marq div{display:flex;gap:44px;width:max-content;animation:mq 32s linear infinite}
@@ -92,7 +92,7 @@ a:focus-visible,button:focus-visible,.st:focus-visible,[tabindex]:focus-visible{
 @keyframes mq{to{transform:translateX(-50%)}}
 /* cartes */
 .card{position:relative;padding:24px;display:flex;flex-direction:column;gap:12px;transform-style:preserve-3d;transition:transform .25s ease-out,border-color .3s;isolation:isolate}
-.card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%),#3b82ff2e,transparent 45%);opacity:0;transition:opacity .3s;z-index:-1}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%),#2e6fd62e,transparent 45%);opacity:0;transition:opacity .3s;z-index:-1}
 .card::after{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:conic-gradient(from var(--a),transparent 40%,var(--cyan),var(--blue),transparent 70%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;animation:spin 4s linear infinite;pointer-events:none}
 .card:hover::before,.card:hover::after{opacity:1}
 .g2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}
@@ -102,13 +102,13 @@ a:focus-visible,button:focus-visible,.st:focus-visible,[tabindex]:focus-visible{
 .head p{max-width:60ch;margin-top:12px}
 .tags{display:flex;flex-wrap:wrap;gap:8px}
 .tag{border:1px solid var(--line);background:#ffffff08;border-radius:999px;padding:7px 14px;font-weight:600;font-size:14px;color:#d5e1ff}
-.pill{font-size:12px;font-weight:700;border-radius:999px;padding:4px 10px;background:#ffb40022;color:var(--amber);border:1px solid #ffb40055;align-self:flex-start}
+.pill{font-size:12px;font-weight:700;border-radius:999px;padding:4px 10px;background:#f5c40022;color:var(--amber);border:1px solid #f5c40055;align-self:flex-start}
 .ico{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,color-mix(in srgb,var(--c) 40%,transparent),transparent);border:1px solid color-mix(in srgb,var(--c) 50%,transparent)}
 .ico svg{width:24px;height:24px;stroke:var(--c);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 /* plan du lab */
 .fig{position:relative;height:420px}
 .fig>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.fig text{font:700 14px Figtree,sans-serif;fill:#fff;paint-order:stroke;stroke:#0a1222;stroke-width:6px}
+.fig text{font:700 14px Figtree,sans-serif;fill:#fff;paint-order:stroke;stroke:#0b1340;stroke-width:6px}
 .fig text.sub{font-weight:400;font-size:13px;fill:var(--mute)}
 .st{cursor:pointer}.st .o{transition:transform .25s;transform-box:fill-box;transform-origin:center}.st:hover .o,.st:focus .o{transform:scale(1.3)}
 .halo{transform-box:fill-box;transform-origin:center;animation:halo 2.4s ease-out infinite}
@@ -119,23 +119,23 @@ a:focus-visible,button:focus-visible,.st:focus-visible,[tabindex]:focus-visible{
 .tl .fill{position:absolute;left:15px;top:6px;width:3px;border-radius:2px;background:linear-gradient(var(--cyan),var(--blue));height:0;transition:height 1.6s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 14px var(--cyan)}
 .tl.in .fill{height:calc(100% - 12px)}
 .tl .card::marker{display:none}
-.dot{position:absolute;left:-41px;top:26px;width:24px;height:24px;border-radius:50%;background:var(--bg);border:4px solid var(--cyan);box-shadow:0 0 0 6px #22d3ee22}
+.dot{position:absolute;left:-41px;top:26px;width:24px;height:24px;border-radius:50%;background:var(--bg);border:4px solid var(--cyan);box-shadow:0 0 0 6px #edbb0022}
 .yr{font:600 14px "JetBrains Mono",monospace;color:var(--cyan)}
 .org{display:grid;grid-template-columns:80px minmax(0,1fr);gap:20px}
 .org .ico{width:80px;height:80px;border-radius:22px}
 .org .ico svg{width:38px;height:38px}
-.cv{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;padding:clamp(24px,3vw,40px);background:linear-gradient(120deg,#1d4ed8cc,#0e7490cc);border:1px solid #ffffff2a;border-radius:24px;position:relative;overflow:hidden}
+.cv{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;padding:clamp(24px,3vw,40px);background:linear-gradient(120deg,#a50044cc,#0e7490cc);border:1px solid #ffffff2a;border-radius:24px;position:relative;overflow:hidden}
 .cv::before{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:-80px;top:-140px;background:radial-gradient(#ffffff40,transparent 65%);animation:drift 8s ease-in-out infinite alternate}
 .cv .btn{background:#fff;color:#0b2a6b}
 /* carrousel */
 .car{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:20px max(4px,calc(50% - min(180px,40%))) 30px;scrollbar-width:none;perspective:1200px}
 .car>article{scroll-snap-align:center;flex:0 0 min(360px,80%);transition:transform .4s,opacity .4s}
 .car>article.dim{opacity:.45;transform:scale(.92) rotateY(var(--ry,0deg))}
-.ill{height:170px;border-radius:16px;background:radial-gradient(120% 100% at 50% 0%,#15254a,#0a1222);border:1px solid var(--line);overflow:hidden;position:relative}
+.ill{height:170px;border-radius:16px;background:radial-gradient(120% 100% at 50% 0%,#15254a,#0b1340);border:1px solid var(--line);overflow:hidden;position:relative}
 .ill svg{position:absolute;inset:0;width:100%;height:100%}
 .ctrl{display:flex;align-items:center;gap:12px}
 .ctrl button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#ffffff0a;color:#fff;cursor:pointer;display:grid;place-items:center;transition:background .2s,transform .2s}
-.ctrl button:hover{background:#3b82ff44;transform:scale(1.08)}
+.ctrl button:hover{background:#2e6fd644;transform:scale(1.08)}
 .ctrl output{font:600 15px "JetBrains Mono",monospace;min-width:70px;text-align:center}
 .dots{display:flex;gap:8px;justify-content:center}
 .dots button{width:10px;height:10px;padding:0;border-radius:5px;border:0;background:#ffffff26;cursor:pointer;transition:width .35s,background .35s}
@@ -144,24 +144,24 @@ a:focus-visible,button:focus-visible,.st:focus-visible,[tabindex]:focus-visible{
 .proj .ill{border-radius:0;border:0;border-bottom:1px solid var(--line);height:190px}
 .proj .bd{padding:24px;display:flex;flex-direction:column;gap:12px;flex:1}
 .proj .bd .btn{margin-top:auto;align-self:flex-start}
-.proj .card.hi{border-color:var(--amber);box-shadow:0 0 0 3px #ffb40066,0 0 60px -10px #ffb400}
+.proj .card.hi{border-color:var(--amber);box-shadow:0 0 0 3px #f5c40066,0 0 60px -10px #f5c400}
 .file{display:flex;gap:14px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#ffffff06}
 .file b{display:block;overflow-wrap:anywhere;font-size:14px}
 .file span{font-size:13px;color:var(--mute)}
 .comp{margin:0;padding:0;list-style:none;display:grid;gap:8px}
 .comp li{display:flex;gap:10px;align-items:flex-start;color:#d5e1ff}
 .comp li::before{content:"✓";flex:none;width:20px;height:20px;margin-top:2px;border-radius:6px;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#fff;font-size:12px;font-weight:900;display:grid;place-items:center}
-.radar{position:relative;aspect-ratio:1;max-width:420px;width:100%;margin-inline:auto;border-radius:50%;background:radial-gradient(circle,#0f1d3a 0 30%,#0a1428 30.5% 31%,#0f1d3a 31.5% 60%,#0a1428 60.5% 61%,#0f1d3a 61.5%);border:1px solid #22d3ee44;overflow:hidden;box-shadow:0 0 80px -20px #22d3ee88}
-.radar::before{content:"";position:absolute;inset:0;background:conic-gradient(from 0deg,#22d3ee00 0 300deg,#22d3ee66 360deg);animation:rot 3.2s linear infinite}
-.radar::after{content:"";position:absolute;inset:50% 0 auto;height:1px;background:#22d3ee33;box-shadow:0 0 0 0 transparent}
+.radar{position:relative;aspect-ratio:1;max-width:420px;width:100%;margin-inline:auto;border-radius:50%;background:radial-gradient(circle,#12195a 0 30%,#0b1342 30.5% 31%,#12195a 31.5% 60%,#0b1342 60.5% 61%,#12195a 61.5%);border:1px solid #edbb0044;overflow:hidden;box-shadow:0 0 80px -20px #edbb0088}
+.radar::before{content:"";position:absolute;inset:0;background:conic-gradient(from 0deg,#edbb0000 0 300deg,#edbb0066 360deg);animation:rot 3.2s linear infinite}
+.radar::after{content:"";position:absolute;inset:50% 0 auto;height:1px;background:#edbb0033;box-shadow:0 0 0 0 transparent}
 @keyframes rot{to{transform:rotate(360deg)}}
 .blip{position:absolute;width:12px;height:12px;margin:-6px;border-radius:50%;background:var(--c);box-shadow:0 0 16px var(--c);animation:bl 3.2s infinite;animation-delay:var(--t)}
 @keyframes bl{0%,100%{opacity:.15;transform:scale(.6)}8%{opacity:1;transform:scale(1.3)}40%{opacity:.5;transform:scale(1)}}
-.radar .lock{position:absolute;inset:36%;display:grid;place-items:center;border-radius:50%;background:#0a1428;border:2px solid var(--cyan);z-index:1}
+.radar .lock{position:absolute;inset:36%;display:grid;place-items:center;border-radius:50%;background:#0b1342;border:2px solid var(--cyan);z-index:1}
 .radar .lock svg{width:46%;stroke:var(--cyan);fill:none;stroke-width:2}
 .src{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
 .src a{font-size:13px;font-weight:700;text-decoration:none;padding:5px 11px;border-radius:8px;background:#ffffff0a;border:1px solid var(--line);transition:border-color .2s,background .2s}
-.src a:hover{border-color:var(--cyan);background:#22d3ee1a}
+.src a:hover{border-color:var(--cyan);background:#edbb001a}
 .cert{border-style:dashed}
 .cert .badge{width:56px;height:56px;animation:float 4s ease-in-out infinite;animation-delay:var(--t)}
 @keyframes float{50%{transform:translateY(-8px) rotate(-4deg)}}
@@ -377,25 +377,25 @@ const VEILLE=[
 {t:'Entraînement',d:"CTF et labs pour pratiquer l'attaque et la défense dans un cadre légal et contrôlé.",c:'var(--red)',i:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',s:[]}];
 
 /* ================= Illustrations animées ================= */
-const T='#e8f0ff',B='#3b82ff',C='#22d3ee',A='#ffb400',Gn='#2ee59d',D='#1b2a4a';
+const T='#e8f0ff',B='#2e6fd6',C='#edbb00',A='#f5c400',Gn='#c2185b',D='#1b2a4a';
 const G={
-linux:`<rect x="40" y="26" width="220" height="118" rx="10" fill="#08101f" stroke="${D}" stroke-width="2"/><circle cx="58" cy="42" r="4" fill="#ff5f57"/><circle cx="72" cy="42" r="4" fill="#febc2e"/><circle cx="86" cy="42" r="4" fill="#28c840"/><text x="56" y="78" fill="${Gn}" font-family="JetBrains Mono,monospace" font-size="14">$ apt install apache2</text><text x="56" y="102" fill="${C}" font-family="JetBrains Mono,monospace" font-size="14">● active (running)</text><rect x="56" y="114" width="10" height="16" fill="${T}"><animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/></rect>`,
+linux:`<rect x="40" y="26" width="220" height="118" rx="10" fill="#0a1238" stroke="${D}" stroke-width="2"/><circle cx="58" cy="42" r="4" fill="#ff5f57"/><circle cx="72" cy="42" r="4" fill="#febc2e"/><circle cx="86" cy="42" r="4" fill="#28c840"/><text x="56" y="78" fill="${Gn}" font-family="JetBrains Mono,monospace" font-size="14">$ apt install apache2</text><text x="56" y="102" fill="${C}" font-family="JetBrains Mono,monospace" font-size="14">● active (running)</text><rect x="56" y="114" width="10" height="16" fill="${T}"><animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/></rect>`,
 win:`<g>${[[96,22,B],[152,22,B],[96,78,B],[152,78,A]].map(([x,y,f],i)=>`<rect x="${x}" y="${y}" width="52" height="52" rx="6" fill="${f}"><animate attributeName="opacity" values="1;.35;1" dur="2.4s" begin="${i*.3}s" repeatCount="indefinite"/></rect>`).join('')}</g>`,
-cs:`<rect x="124" y="16" width="52" height="70" rx="6" fill="#08101f" stroke="${C}" stroke-width="2"/><g fill="${Gn}"><rect x="134" y="28" width="32" height="6" rx="2"/><rect x="134" y="42" width="32" height="6" rx="2"><animate attributeName="fill" values="${Gn};${A};${Gn}" dur="1.2s" repeatCount="indefinite"/></rect></g><g stroke="${B}" stroke-width="3" fill="none"><path id="cs1" d="M150 86v20H70v12"/><path d="M150 106h80v12M150 106v12"/></g><circle r="4" fill="${C}"><animateMotion dur="1.8s" repeatCount="indefinite" path="M150 86v20H70v12"/></circle><circle r="4" fill="${A}"><animateMotion dur="1.8s" begin=".9s" repeatCount="indefinite" path="M150 86v20h80v12"/></circle><g fill="${B}"><rect x="50" y="118" width="40" height="26" rx="4"/><rect x="130" y="118" width="40" height="26" rx="4"/><rect x="210" y="118" width="40" height="26" rx="4"/></g>`,
-ad:`<g stroke="${B}" stroke-width="3" fill="none"><path d="M150 46v22M80 68h140M80 68v20M150 68v20M220 68v20M80 100l-20 24M80 100l20 24M220 100l-20 24M220 100l20 24"/></g><circle cx="150" cy="32" r="16" fill="${B}"/><circle cx="150" cy="32" r="16" fill="none" stroke="${C}" stroke-width="2" class="halo"/><g fill="#08101f" stroke="${T}" stroke-width="3"><circle cx="80" cy="96" r="10"/><circle cx="150" cy="96" r="10"/><circle cx="220" cy="96" r="10"/></g><g fill="${A}"><circle cx="60" cy="130" r="7"/><circle cx="100" cy="130" r="7"/><circle cx="200" cy="130" r="7"/><circle cx="240" cy="130" r="7"/></g>`,
-dns:`<g fill="none" stroke="${B}" stroke-width="3"><circle cx="130" cy="82" r="52"/><ellipse cx="130" cy="82" rx="22" ry="52"><animate attributeName="rx" values="22;46;22" dur="4s" repeatCount="indefinite"/></ellipse><path d="M78 82h104M86 56h88M86 108h88"/></g><rect x="176" y="100" width="104" height="32" rx="7" fill="#08101f" stroke="${C}" stroke-width="2"/><text x="188" y="121" fill="${C}" font-family="JetBrains Mono,monospace" font-size="13">lab.local</text>`,
-dhcp:`<rect x="40" y="58" width="80" height="46" rx="7" fill="#08101f" stroke="${D}" stroke-width="2"/><circle cx="58" cy="81" r="5" fill="${Gn}"><animate attributeName="opacity" values="1;.2;1" dur=".8s" repeatCount="indefinite"/></circle><path d="M120 81h56" stroke="${C}" stroke-width="3" stroke-dasharray="6 6"><animate attributeName="stroke-dashoffset" from="24" to="0" dur=".8s" repeatCount="indefinite"/></path><path d="M176 55h80l14 26-14 26h-80z" fill="${A}"/><text x="186" y="86" fill="#08101f" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700">10.0.20.42</text>`,
-fw:`<g fill="#ff5a5f">${[0,1,2,3].flatMap(r=>[0,1,2,3,4,5,6].map(c=>`<rect x="${(r%2?-18:4)+c*44}" y="${18+r*32}" width="40" height="26" rx="3" opacity="${.55+((r*7+c)%5)*.09}"/>`)).join('')}</g><circle cx="150" cy="80" r="40" fill="#08101f" stroke="${Gn}" stroke-width="3"/><circle cx="150" cy="80" r="40" fill="none" stroke="${Gn}" stroke-width="2" class="halo"/><path d="M134 80l11 11 21-22" stroke="${Gn}" stroke-width="6" fill="none" stroke-linecap="round"/>`,
+cs:`<rect x="124" y="16" width="52" height="70" rx="6" fill="#0a1238" stroke="${C}" stroke-width="2"/><g fill="${Gn}"><rect x="134" y="28" width="32" height="6" rx="2"/><rect x="134" y="42" width="32" height="6" rx="2"><animate attributeName="fill" values="${Gn};${A};${Gn}" dur="1.2s" repeatCount="indefinite"/></rect></g><g stroke="${B}" stroke-width="3" fill="none"><path id="cs1" d="M150 86v20H70v12"/><path d="M150 106h80v12M150 106v12"/></g><circle r="4" fill="${C}"><animateMotion dur="1.8s" repeatCount="indefinite" path="M150 86v20H70v12"/></circle><circle r="4" fill="${A}"><animateMotion dur="1.8s" begin=".9s" repeatCount="indefinite" path="M150 86v20h80v12"/></circle><g fill="${B}"><rect x="50" y="118" width="40" height="26" rx="4"/><rect x="130" y="118" width="40" height="26" rx="4"/><rect x="210" y="118" width="40" height="26" rx="4"/></g>`,
+ad:`<g stroke="${B}" stroke-width="3" fill="none"><path d="M150 46v22M80 68h140M80 68v20M150 68v20M220 68v20M80 100l-20 24M80 100l20 24M220 100l-20 24M220 100l20 24"/></g><circle cx="150" cy="32" r="16" fill="${B}"/><circle cx="150" cy="32" r="16" fill="none" stroke="${C}" stroke-width="2" class="halo"/><g fill="#0a1238" stroke="${T}" stroke-width="3"><circle cx="80" cy="96" r="10"/><circle cx="150" cy="96" r="10"/><circle cx="220" cy="96" r="10"/></g><g fill="${A}"><circle cx="60" cy="130" r="7"/><circle cx="100" cy="130" r="7"/><circle cx="200" cy="130" r="7"/><circle cx="240" cy="130" r="7"/></g>`,
+dns:`<g fill="none" stroke="${B}" stroke-width="3"><circle cx="130" cy="82" r="52"/><ellipse cx="130" cy="82" rx="22" ry="52"><animate attributeName="rx" values="22;46;22" dur="4s" repeatCount="indefinite"/></ellipse><path d="M78 82h104M86 56h88M86 108h88"/></g><rect x="176" y="100" width="104" height="32" rx="7" fill="#0a1238" stroke="${C}" stroke-width="2"/><text x="188" y="121" fill="${C}" font-family="JetBrains Mono,monospace" font-size="13">lab.local</text>`,
+dhcp:`<rect x="40" y="58" width="80" height="46" rx="7" fill="#0a1238" stroke="${D}" stroke-width="2"/><circle cx="58" cy="81" r="5" fill="${Gn}"><animate attributeName="opacity" values="1;.2;1" dur=".8s" repeatCount="indefinite"/></circle><path d="M120 81h56" stroke="${C}" stroke-width="3" stroke-dasharray="6 6"><animate attributeName="stroke-dashoffset" from="24" to="0" dur=".8s" repeatCount="indefinite"/></path><path d="M176 55h80l14 26-14 26h-80z" fill="${A}"/><text x="186" y="86" fill="#0a1238" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700">10.0.20.42</text>`,
+fw:`<g fill="#d6104a">${[0,1,2,3].flatMap(r=>[0,1,2,3,4,5,6].map(c=>`<rect x="${(r%2?-18:4)+c*44}" y="${18+r*32}" width="40" height="26" rx="3" opacity="${.55+((r*7+c)%5)*.09}"/>`)).join('')}</g><circle cx="150" cy="80" r="40" fill="#0a1238" stroke="${Gn}" stroke-width="3"/><circle cx="150" cy="80" r="40" fill="none" stroke="${Gn}" stroke-width="2" class="halo"/><path d="M134 80l11 11 21-22" stroke="${Gn}" stroke-width="6" fill="none" stroke-linecap="round"/>`,
 dock:`<path d="M30 110h240c-8 34-48 50-110 50S40 150 30 110z" fill="${B}"/><g fill="${T}">${[[70,86],[100,86],[130,86],[160,86],[100,60],[130,60],[130,34]].map(([x,y],i)=>`<rect x="${x}" y="${y}" width="26" height="22" rx="3"><animate attributeName="y" values="${y-30};${y}" dur=".6s" begin="${i*.15}s" fill="freeze"/></rect>`).join('')}</g><path d="M0 150q25-10 50 0t50 0 50 0 50 0 50 0 50 0" stroke="${C}" stroke-width="3" fill="none"><animateTransform attributeName="transform" type="translate" values="0 0;-50 0" dur="2s" repeatCount="indefinite"/></path>`,
-net:`<g stroke="${B}" stroke-width="4" stroke-linecap="round"><path d="M40 85h70M190 85h70M150 60V20M150 110v40"/></g><rect x="110" y="62" width="80" height="46" rx="8" fill="${B}"/><g fill="${T}">${[0,1,2,3,4].map(i=>`<rect x="${122+i*12}" y="78" width="8" height="14" rx="1"><animate attributeName="fill" values="${T};${Gn};${T}" dur="1.5s" begin="${i*.2}s" repeatCount="indefinite"/></rect>`).join('')}</g><g fill="#08101f" stroke="${C}" stroke-width="3"><circle cx="30" cy="85" r="10"/><circle cx="270" cy="85" r="10"/><circle cx="150" cy="14" r="8"/><circle cx="150" cy="154" r="8"/></g>${['M40 85h70','M260 85h-70','M150 22v38','M150 146v-36'].map((p,i)=>`<circle r="4" fill="${A}"><animateMotion dur="1.4s" begin="${i*.35}s" repeatCount="indefinite" path="${p}"/></circle>`).join('')}`,
-sys:`${[0,1,2].map(i=>`<rect x="80" y="${16+i*46}" width="140" height="38" rx="7" fill="#08101f" stroke="${D}" stroke-width="2"/><circle cx="100" cy="${35+i*46}" r="5" fill="${i===2?A:Gn}"><animate attributeName="opacity" values="1;.3;1" dur="${1+i*.4}s" repeatCount="indefinite"/></circle><rect x="120" y="${31+i*46}" width="80" height="8" rx="4" fill="${D}"/><rect x="120" y="${31+i*46}" width="80" height="8" rx="4" fill="${C}"><animate attributeName="width" values="10;80;40;70;10" dur="${3+i}s" repeatCount="indefinite"/></rect>`).join('')}`};
+net:`<g stroke="${B}" stroke-width="4" stroke-linecap="round"><path d="M40 85h70M190 85h70M150 60V20M150 110v40"/></g><rect x="110" y="62" width="80" height="46" rx="8" fill="${B}"/><g fill="${T}">${[0,1,2,3,4].map(i=>`<rect x="${122+i*12}" y="78" width="8" height="14" rx="1"><animate attributeName="fill" values="${T};${Gn};${T}" dur="1.5s" begin="${i*.2}s" repeatCount="indefinite"/></rect>`).join('')}</g><g fill="#0a1238" stroke="${C}" stroke-width="3"><circle cx="30" cy="85" r="10"/><circle cx="270" cy="85" r="10"/><circle cx="150" cy="14" r="8"/><circle cx="150" cy="154" r="8"/></g>${['M40 85h70','M260 85h-70','M150 22v38','M150 146v-36'].map((p,i)=>`<circle r="4" fill="${A}"><animateMotion dur="1.4s" begin="${i*.35}s" repeatCount="indefinite" path="${p}"/></circle>`).join('')}`,
+sys:`${[0,1,2].map(i=>`<rect x="80" y="${16+i*46}" width="140" height="38" rx="7" fill="#0a1238" stroke="${D}" stroke-width="2"/><circle cx="100" cy="${35+i*46}" r="5" fill="${i===2?A:Gn}"><animate attributeName="opacity" values="1;.3;1" dur="${1+i*.4}s" repeatCount="indefinite"/></circle><rect x="120" y="${31+i*46}" width="80" height="8" rx="4" fill="${D}"/><rect x="120" y="${31+i*46}" width="80" height="8" rx="4" fill="${C}"><animate attributeName="width" values="10;80;40;70;10" dur="${3+i}s" repeatCount="indefinite"/></rect>`).join('')}`};
 const ill=k=>`<svg viewBox="0 0 300 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${G[k]}</svg>`;
 
 /* ================= Rendu ================= */
 $('name').innerHTML=[...'Omar Ouerfelli'].map((c,i)=>c===' '?'<br>':`<span style="--d:${i}" aria-hidden="true">${c}</span>`).join('');
 $('marq').innerHTML=[...STACK,...STACK].map(s=>`<span>${s}</span>`).join('');
 $('stats').innerHTML=STATS.map(([n,l],i)=>`<div class="glass card stat rv" style="--i:${i}"><b data-n="${n}">0</b><span>${l}</span></div>`).join('');
-$('certs').innerHTML=[1,2,3,4].map(i=>`<article class="glass card cert rv" style="--i:${i}"><svg class="badge" style="--t:${i*.4}s" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="22" r="17" fill="none" stroke="#3b82ff" stroke-width="3" stroke-dasharray="7 5"/><circle cx="28" cy="22" r="8" fill="#3b82ff33"/><path d="M17 35l-5 15 9-5 7 7V38M39 35l5 15-9-5-7 7" fill="#22d3ee55"/></svg><span class="pill">En préparation</span><h3>Certification ${i}</h3><p class="mute">Nom, organisme et année ajoutés à l'obtention.</p></article>`).join('');
+$('certs').innerHTML=[1,2,3,4].map(i=>`<article class="glass card cert rv" style="--i:${i}"><svg class="badge" style="--t:${i*.4}s" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="22" r="17" fill="none" stroke="#2e6fd6" stroke-width="3" stroke-dasharray="7 5"/><circle cx="28" cy="22" r="8" fill="#2e6fd633"/><path d="M17 35l-5 15 9-5 7 7V38M39 35l5 15-9-5-7 7" fill="#edbb0055"/></svg><span class="pill">En préparation</span><h3>Certification ${i}</h3><p class="mute">Nom, organisme et année ajoutés à l'obtention.</p></article>`).join('');
 $('car').innerHTML=ATELIERS.map(a=>`<article class="glass card"><div class="ill">${ill(a.g)}</div><h3>${a.t}</h3><p class="mute">${a.d}</p></article>`).join('');
 $('dots').innerHTML=ATELIERS.map((a,i)=>`<button aria-label="Aller à ${a.t}" data-i="${i}"></button>`).join('');
 $('proj').innerHTML=PROJETS.map((p,i)=>`<article class="glass card rv" id="p-${p.id}" style="--i:${i}"><div class="ill">${ill(p.g)}</div><div class="bd"><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><h3>${p.t}</h3>${p.soon?'<span class="pill">À venir</span>':''}</div><p class="mute">${p.d}</p>${p.soon?'':`<a class="btn mag" href="${WIX}">Voir le projet${p.k?` · ${p.k}`:''}</a>`}</div></article>`).join('');
@@ -409,11 +409,11 @@ const LINK=140;
 const frame=()=>{
 cx.clearRect(0,0,W,H);
 for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;const dx=mouse.x-p.x,dy=mouse.y-p.y,d=Math.hypot(dx,dy);if(d<180){p.x+=dx*.004;p.y+=dy*.004}}
-for(let i=0;i<pts.length;i++){const a=pts[i];for(let j=i+1;j<pts.length;j++){const b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<LINK){cx.strokeStyle=`rgba(80,140,255,${(1-d/LINK)*.35})`;cx.lineWidth=1;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke();if(!RM&&Math.random()<.0009&&pk.length<26)pk.push({a,b,t:0})}}
-const dm=Math.hypot(a.x-mouse.x,a.y-mouse.y);if(dm<180){cx.strokeStyle=`rgba(34,211,238,${(1-dm/180)*.6})`;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(mouse.x,mouse.y);cx.stroke()}}
-for(const p of pts){cx.fillStyle='rgba(170,200,255,.85)';cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fill()}
+for(let i=0;i<pts.length;i++){const a=pts[i];for(let j=i+1;j<pts.length;j++){const b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<LINK){cx.strokeStyle=`rgba(237,187,0,${(1-d/LINK)*.35})`;cx.lineWidth=1;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke();if(!RM&&Math.random()<.0009&&pk.length<26)pk.push({a,b,t:0})}}
+const dm=Math.hypot(a.x-mouse.x,a.y-mouse.y);if(dm<180){cx.strokeStyle=`rgba(165,0,68,${(1-dm/180)*.6})`;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(mouse.x,mouse.y);cx.stroke()}}
+for(const p of pts){cx.fillStyle='rgba(255,220,120,.85)';cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fill()}
 pk=pk.filter(k=>(k.t+=.018)<1);
-for(const k of pk){const x=k.a.x+(k.b.x-k.a.x)*k.t,y=k.a.y+(k.b.y-k.a.y)*k.t;cx.fillStyle='#22d3ee';cx.shadowColor='#22d3ee';cx.shadowBlur=12;cx.beginPath();cx.arc(x,y,2.4,0,7);cx.fill();cx.shadowBlur=0}
+for(const k of pk){const x=k.a.x+(k.b.x-k.a.x)*k.t,y=k.a.y+(k.b.y-k.a.y)*k.t;cx.fillStyle='#edbb00';cx.shadowColor='#edbb00';cx.shadowBlur=12;cx.beginPath();cx.arc(x,y,2.4,0,7);cx.fill();cx.shadowBlur=0}
 if(!RM&&!document.hidden)requestAnimationFrame(frame);
 };
 size();addEventListener('resize',size);frame();
@@ -481,7 +481,7 @@ const N=[
 {k:'pc',n:'Postes',s:'GPO',x:.6,y:1,w:'b',m:'l',p:'ad'},
 {k:'dock',n:'Docker',s:'À venir',x:1,y:1,w:'b',m:'l',p:'dock'}];
 const R=[['net','pf','sw'],['sw','bt','ad','deb'],['sw','bb','pc','dock']];
-const RC=['#ff5a5f','#3b82ff','#2ee59d'];
+const RC=['#d6104a','#2e6fd6','#c2185b'];
 const s=$('map');
 const draw=()=>{
 const W2=s.clientWidth,H2=s.clientHeight;if(!W2)return;
@@ -499,7 +499,7 @@ if(!nar&&['deb','dock'].includes(n.k)){a='end';tx=x+12}
 if(!nar&&['pf','sw'].includes(n.k)){a='end';tx=x+10}
 if(nar&&n.k==='sw')ty-=22;
 const big=['pf','sw'].includes(n.k);
-return `<g class="st" ${n.p?`tabindex="0" role="link" data-p="${n.p}" aria-label="${n.n} : voir le projet"`:''}>${n.p?`<circle class="halo" cx="${x}" cy="${y}" r="10" fill="none" stroke="#22d3ee" stroke-width="2"/>`:''}<circle class="o" cx="${x}" cy="${y}" r="${big?13:10}" fill="#0a1222" stroke="#fff" stroke-width="${big?5:4}"/>${n.p?`<circle cx="${x}" cy="${y}" r="3.5" fill="#ffb400"/>`:''}<text x="${tx}" y="${ty}" text-anchor="${a}">${n.n}</text><text class="sub" x="${tx}" y="${ty+17}" text-anchor="${a}">${n.s}</text></g>`}).join('');
+return `<g class="st" ${n.p?`tabindex="0" role="link" data-p="${n.p}" aria-label="${n.n} : voir le projet"`:''}>${n.p?`<circle class="halo" cx="${x}" cy="${y}" r="10" fill="none" stroke="#edbb00" stroke-width="2"/>`:''}<circle class="o" cx="${x}" cy="${y}" r="${big?13:10}" fill="#0b1340" stroke="#fff" stroke-width="${big?5:4}"/>${n.p?`<circle cx="${x}" cy="${y}" r="3.5" fill="#f5c400"/>`:''}<text x="${tx}" y="${ty}" text-anchor="${a}">${n.n}</text><text class="sub" x="${tx}" y="${ty+17}" text-anchor="${a}">${n.s}</text></g>`}).join('');
 s.innerHTML=lines+pkt+st;
 s.querySelectorAll('[data-p]').forEach(g=>{g.addEventListener('click',()=>openProject(g.dataset.p));g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openProject(g.dataset.p)}})});
 };

@@ -176,10 +176,16 @@ footer a{text-decoration:none}footer a:hover{color:var(--cyan)}
 @media(max-width:600px){.g2,footer .wrap{grid-template-columns:minmax(0,1fr)}.fig{height:580px}.tabs a{padding:10px 9px;font-size:14px}.logo span{display:none}nav{margin-inline:8px}.term pre{height:280px;font-size:13px}.org{grid-template-columns:56px minmax(0,1fr)}.org .ico{width:56px;height:56px}#glow{display:none}}
 @media(hover:none){#glow{display:none}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.name span{opacity:1;transform:none}.js .rv{opacity:1;transform:none;filter:none}.marq div{animation:none}}
+.stripes{position:fixed;inset:0;z-index:-4;pointer-events:none;background:repeating-linear-gradient(90deg,#004d98 0 72px,#a50044 72px 144px)}
+.stripes::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#050a24b0 0%,#050a24e6 55%,#050a24f5 100%)}
+body::before{content:"";position:fixed;left:0;right:0;top:0;height:7px;z-index:200;background:repeating-linear-gradient(90deg,#004d98 0 36px,#a50044 36px 72px);box-shadow:0 2px 0 #edbb00}
+nav,header{border-bottom:2px solid #edbb0066}
+.btn:not(.ghost){background:linear-gradient(90deg,#004d98,#a50044)!important;box-shadow:0 8px 28px #a5004466!important}
+.card:hover{border-color:#edbb00aa!important}
 </style>
 </head>
 <body>
-<div class="aurora"></div><canvas id="net" aria-hidden="true"></canvas><div class="grain"></div><div id="glow"></div><div id="wipe"></div>
+<div class="stripes"></div><div class="aurora"></div><canvas id="net" aria-hidden="true"></canvas><div class="grain"></div><div id="glow"></div><div id="wipe"></div>
 
 <nav><div class="in">
 <a class="logo" href="#accueil"><i></i><span>Omar Ouerfelli</span></a>

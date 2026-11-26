@@ -260,6 +260,8 @@ footer{border-image:repeating-linear-gradient(90deg,#e70013 0 24px,#fff 24px 48p
 .fc{position:absolute;width:56px;height:56px;border-radius:50%;background:url(faces.jpg) 0 0/728px 56px;border:3px solid #ff8a1f;box-shadow:0 6px 18px #000a;opacity:.95}
 .fc.op{border-color:#f7c948}
 
+.snd{position:fixed;left:18px;bottom:18px;z-index:150;border:2px solid #fff;background:linear-gradient(90deg,#004d98,#a50044,#e70013,#ff8a1f);color:#fff;font:800 15px Inter,sans-serif;padding:13px 20px;border-radius:999px;cursor:pointer;box-shadow:0 8px 24px #000a}
+.fc.lu{width:84px;height:84px;background:url(lucia.jpg) center/cover;border-color:#ff5fa2}
 </style>
 </head>
 <body>
@@ -604,7 +606,21 @@ if(!RM)setInterval(()=>{if(document.hidden)return;const e=document.createElement
 ;{const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;const N=['Franky','Luffy','Sanji','Robin','Usopp','Nami','Zoro','Chopper','Kakashi','Iruka','Sakura','Naruto','Sasuke'];
 const box=document.createElement('div');box.className='crew';box.setAttribute('aria-hidden','true');
 N.forEach((n,i)=>{const d=document.createElement('div');d.className='fc '+(i<8?'op':'na');d.title=n;d.style.cssText='background-position:'+(-i*56)+'px 0;left:'+(((i*37)%84)+3)+'vw;top:'+(((i*53)%62)+14)+'vh';box.appendChild(d);if(!RM){const dx=(i%2?1:-1)*(6+(i*5)%10),dy=(i%3?1:-1)*(5+(i*7)%9);d.animate([{transform:'translate(0,0) rotate(-6deg)'},{transform:'translate('+dx+'vw,'+dy+'vh) rotate(8deg)'}],{duration:9000+(i*1300)%7000,direction:'alternate',iterations:Infinity,easing:'ease-in-out'})}});
+{const d=document.createElement('div');d.className='fc lu';d.title='Lucia';d.style.cssText='left:46vw;top:58vh';box.appendChild(d);if(!RM)d.animate([{transform:'translate(0,0) rotate(-5deg)'},{transform:'translate(9vw,-7vh) rotate(7deg)'}],{duration:11000,direction:'alternate',iterations:Infinity,easing:'ease-in-out'})}
 document.body.appendChild(box)}
+;{const AC=window.AudioContext||window.webkitAudioContext;if(AC){let ctx,mg,on=false,go=false,step=0,nx=0,nb;const D=60/84/4,CH=[[220,261.63,329.63,392],[174.61,220,261.63,329.63],[196,246.94,293.66,349.23],[164.81,196,246.94,293.66]];
+const b=document.createElement('button');b.className='snd';b.type='button';b.textContent='🔇 Son';document.body.appendChild(b);
+const env=(g,t,a,d,v)=>{g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime(v,t+a);g.gain.exponentialRampToValueAtTime(0.0001,t+a+d)};
+const osc=(type,f,t,a,d,v,out)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.setValueAtTime(f,t);env(g,t,a,d,v);o.connect(g);g.connect(out||mg);o.start(t);o.stop(t+a+d+.05);return o};
+const play=(st,t)=>{const bar=(st/16|0)%4,p=st%16,c=CH[bar];
+if(p===0){const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=900;lp.connect(mg);c.forEach(f=>osc('triangle',f/2,t,.4,D*15,.12,lp))}
+if(p===0||p===8){const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.setValueAtTime(130,t);o.frequency.exponentialRampToValueAtTime(42,t+.16);env(g,t,.005,.22,.9);o.connect(g);g.connect(mg);o.start(t);o.stop(t+.3)}
+if(p%4===2){const n=ctx.createBufferSource(),g=ctx.createGain(),hp=ctx.createBiquadFilter();n.buffer=nb;hp.type='highpass';hp.frequency.value=7000;env(g,t,.002,.05,.25);n.connect(hp);hp.connect(g);g.connect(mg);n.start(t);n.stop(t+.1)}
+if(p===4||p===10||p===14){osc('sine',c[(st*7)%4]*2,t,.01,.3,.16)}};
+const sched=()=>{while(nx<ctx.currentTime+.3){play(step,nx);nx+=D;step=(step+1)%64}};
+const start=()=>{if(go)return;go=true;ctx=new AC();mg=ctx.createGain();mg.gain.value=.2;mg.connect(ctx.destination);nb=ctx.createBuffer(1,ctx.sampleRate*.1,ctx.sampleRate);const d=nb.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;on=true;b.textContent='🔊 Son';nx=ctx.currentTime+.1;setInterval(sched,100)};
+b.addEventListener('click',e=>{e.stopPropagation();if(!go){start();return}on=!on;mg.gain.setTargetAtTime(on?.2:0,ctx.currentTime,.05);b.textContent=on?'🔊 Son':'🔇 Son'});
+const first=()=>{start();removeEventListener('pointerdown',first);removeEventListener('keydown',first)};addEventListener('pointerdown',first);addEventListener('keydown',first)}}
 </script>
 <button class="fan" id="fan"><svg style="vertical-align:-4px;margin-right:6px;border-radius:3px" viewBox="0 0 900 600" width="22" aria-hidden="true"><rect width="900" height="600" fill="#e70013"/><circle cx="450" cy="300" r="150" fill="#fff"/><circle cx="450" cy="300" r="110" fill="#e70013"/><circle cx="478" cy="300" r="90" fill="#fff"/><polygon points="521.4,259.5 511.0,293.8 539.6,315.5 503.8,316.2 492.0,350.0 480.2,316.2 444.4,315.5 473.0,293.8 462.6,259.5 492.0,280.0" fill="#e70013" stroke="#e70013"/></svg>Vive la Tunisie !</button>
 </body>

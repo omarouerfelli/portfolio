@@ -235,10 +235,30 @@ footer{border-image:repeating-linear-gradient(90deg,#e70013 0 36px,#fff 36px 72p
 @keyframes fl{from{transform:perspective(600px) rotateY(-12deg) skewY(-1.5deg)}to{transform:perspective(600px) rotateY(12deg) skewY(1.5deg)}}
 @media (prefers-reduced-motion:reduce){.flag{animation:none}}
 
+/* BAZAR : Barça x Naruto x One Piece x Tunisie */
+.stripes{background:repeating-linear-gradient(90deg,#004d98 0 72px,#a50044 72px 144px)}
+.stripes::after{background:linear-gradient(180deg,#0e0a1255,#0e0a12a8 60%,#0e0a12e0)}
+body::before{background:repeating-linear-gradient(90deg,#e70013 0 24px,#fff 24px 48px,#004d98 48px 72px,#a50044 72px 96px,#ff8a1f 96px 120px,#d9b36a 120px 144px);box-shadow:0 2px 0 #f7c948}
+footer{border-image:repeating-linear-gradient(90deg,#e70013 0 24px,#fff 24px 48px,#004d98 48px 72px,#a50044 72px 96px,#ff8a1f 96px 120px,#d9b36a 120px 144px) 7}
+.btn:not(.ghost),.kicker,.fan{background:linear-gradient(90deg,#004d98,#a50044,#e70013,#ff8a1f)!important}
+.btn:not(.ghost){box-shadow:0 8px 28px #a5004466!important}
+.vis{background:linear-gradient(90deg,#004d98,#a50044,#e70013,#ff8a1f,#004d98)}
+.vis span:nth-child(3n+1){color:#f7c948}.vis span:nth-child(3n+2){color:#fff}.vis span:nth-child(3n){color:#9fd3ff}
+.waves{display:block;height:16vh}
+.legends{justify-content:space-around}
+.legends b{font-size:15vw;-webkit-text-stroke:3px #ffffff30}
+.legends small{font-size:1.5vw;letter-spacing:.2em}
+.compass{opacity:.4}
+.stk{position:fixed;inset:0;z-index:-1;pointer-events:none}
+.stk img{position:absolute;top:13vh;width:9vw;border:3px solid #f7c948;border-radius:8px;filter:grayscale(.4) contrast(1.1);opacity:.9;box-shadow:0 8px 24px #000a;animation:bob 4s ease-in-out infinite alternate}
+.stk img:nth-child(1){right:31vw;--r:-8deg}.stk img:nth-child(2){right:18vw;--r:5deg;animation-delay:-1.3s}.stk img:nth-child(3){right:5vw;--r:-4deg;animation-delay:-2.6s}
+@keyframes bob{from{transform:translateY(0) rotate(var(--r))}to{transform:translateY(-14px) rotate(calc(var(--r)*-1))}}
+@media (prefers-reduced-motion:reduce){.stk img{animation:none;transform:rotate(var(--r))}}
+
 </style>
 </head>
 <body>
-<div class="stripes"></div><div class="pitch"></div><div class="waves" aria-hidden="true"></div><div class="compass" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M100 4 120 80 196 100 120 120 100 196 80 120 4 100 80 80Z" fill="#ff8a1f" fill-opacity=".3" stroke="#ff8a1f" stroke-opacity=".7" stroke-width="2"/><circle cx="100" cy="100" r="16" fill="#0e0a12" stroke="#ff8a1f" stroke-opacity=".7" stroke-width="3"/></svg></div><div class="flag" aria-hidden="true"><svg viewBox="0 0 900 600" aria-hidden="true"><rect width="900" height="600" fill="#e70013"/><circle cx="450" cy="300" r="150" fill="#fff"/><circle cx="450" cy="300" r="110" fill="#e70013"/><circle cx="478" cy="300" r="90" fill="#fff"/><polygon points="521.4,259.5 511.0,293.8 539.6,315.5 503.8,316.2 492.0,350.0 480.2,316.2 444.4,315.5 473.0,293.8 462.6,259.5 492.0,280.0" fill="#e70013" stroke="#e70013"/></svg></div><div class="legends" aria-hidden="true"><b>忍<small>SHINOBI</small></b><b>火<small>VOLONTÉ DU FEU</small></b><b>تونس<small>TUNISIE</small></b></div><div class="mega">TUNISIE</div><div class="aurora"></div><canvas id="net" aria-hidden="true"></canvas><div class="grain"></div><div id="glow"></div><div id="wipe"></div>
+<div class="stripes"></div><div class="pitch"></div><div class="waves" aria-hidden="true"></div><div class="compass" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M100 4 120 80 196 100 120 120 100 196 80 120 4 100 80 80Z" fill="#ff8a1f" fill-opacity=".3" stroke="#ff8a1f" stroke-opacity=".7" stroke-width="2"/><circle cx="100" cy="100" r="16" fill="#0e0a12" stroke="#ff8a1f" stroke-opacity=".7" stroke-width="3"/></svg></div><div class="flag" aria-hidden="true"><svg viewBox="0 0 900 600" aria-hidden="true"><rect width="900" height="600" fill="#e70013"/><circle cx="450" cy="300" r="150" fill="#fff"/><circle cx="450" cy="300" r="110" fill="#e70013"/><circle cx="478" cy="300" r="90" fill="#fff"/><polygon points="521.4,259.5 511.0,293.8 539.6,315.5 503.8,316.2 492.0,350.0 480.2,316.2 444.4,315.5 473.0,293.8 462.6,259.5 492.0,280.0" fill="#e70013" stroke="#e70013"/></svg></div><div class="legends" aria-hidden="true"><b>忍<small>NARUTO</small></b><b>海<small>ONE PIECE</small></b><b>10<small>VISCA BARÇA</small></b><b>تونس<small>TUNISIE</small></b></div><div class="mega">BARÇA · 忍 · TUNISIE</div><div class="stk" aria-hidden="true"><img src="j2.jpg" alt=""><img src="j1.jpg" alt=""><img src="j3.jpg" alt=""></div><div class="waves" aria-hidden="true"></div><div class="aurora"></div><canvas id="net" aria-hidden="true"></canvas><div class="grain"></div><div id="glow"></div><div id="wipe"></div>
 
 <nav><div class="in">
 <a class="logo" href="#accueil"><i></i><span>Omar Ouerfelli</span></a>
@@ -251,7 +271,7 @@ footer{border-image:repeating-linear-gradient(90deg,#e70013 0 36px,#fff 36px 72p
 <section class="view" id="v-accueil">
 <div class="band"><div class="wrap hero">
 <div>
-<span class="kicker rv">忍 Naruto · BTS SIO SISR · alternance</span>
+<span class="kicker rv">Barça × Naruto × One Piece × Tunisie</span>
 <h1 class="name" id="name" aria-label="Omar Ouerfelli">Omar Ouerfelli</h1>
 <p class="role rv" style="--i:2"><span class="grad" style="font-weight:800">Portfolio Informatique</span> · <b id="type"></b><span class="caret"></span></p>
 <p class="lead rv" style="--i:3">Étudiant en BTS SIO option SISR, spécialisé dans l'administration des systèmes et réseaux, avec un intérêt marqué pour la cybersécurité.</p>
@@ -390,13 +410,13 @@ footer{border-image:repeating-linear-gradient(90deg,#e70013 0 36px,#fff 36px 72p
 </section>
 </main>
 
-<div class="marq vis" aria-hidden="true"><div><span>NARUTO</span><span>SHINOBI</span><span>TUNISIE</span><span>DATTEBAYO</span><span>忍者</span><span>تونس</span><span>NARUTO</span><span>SHINOBI</span><span>TUNISIE</span><span>DATTEBAYO</span><span>忍者</span><span>تونس</span></div></div>
+<div class="marq vis" aria-hidden="true"><div><span>VISCA EL BARÇA</span><span>DATTEBAYO</span><span>VIVA LA TUNISIA</span><span>NAKAMA</span><span>MÉS QUE UN CLUB</span><span>SHINOBI</span><span>ONE PIECE</span><span>تونس</span><span>VISCA EL BARÇA</span><span>DATTEBAYO</span><span>VIVA LA TUNISIA</span><span>NAKAMA</span><span>MÉS QUE UN CLUB</span><span>SHINOBI</span><span>ONE PIECE</span><span>تونس</span></div></div>
 <footer class="band" style="padding-block:48px 28px"><div class="wrap">
 <div><a class="logo" href="#accueil"><i></i>Omar Ouerfelli</a><p class="mute" style="margin-top:12px">Portfolio professionnel · BTS SIO option SISR</p></div>
 <div class="fl"><b>Contact</b><span class="mute">hello@it-portfolio.fr</span><span class="mute">Paris, France</span></div>
 <div class="fl"><b>Réseaux</b><a class="mute" href="https://www.linkedin.com/">LinkedIn</a><a class="mute" href="https://www.instagram.com/">Instagram</a></div>
 </div>
-<div class="copy"><span>© 2026 Portfolio Professionnel. Tous droits réservés.</span><span>Tunisie · Shinobi · Volonté du feu</span></div>
+<div class="copy"><span>© 2026 Portfolio Professionnel. Tous droits réservés.</span><span>Visca el Barça · Dattebayo · Nakama · Vive la Tunisie</span></div>
 </footer>
 
 <script>
@@ -408,13 +428,13 @@ const $=id=>document.getElementById(id);
 /* ================= Contenu (tout le texte à modifier est ici) ================= */
 const WIX='https://omarouerfelli2021.wixsite.com/portfolio-profession/ateliers-pro';
 const ROLES=['Administration systèmes','Réseaux & infrastructures','Cybersécurité','Windows Server & Linux'];
-const STACK=['Naruto','Debian','Shinobi','Windows Server','Active Directory','pfSense','DNS','DHCP','GPO','Apache','VLAN','Docker','Tunisie','HubSpot','Virtualisation','Chakra'];
+const STACK=['Visca el Barça','Debian','Naruto','Windows Server','Active Directory','pfSense','DNS','DHCP','GPO','Apache','VLAN','Docker','Vive la Tunisie','HubSpot','Virtualisation','One Piece'];
 const STATS=[[6,'ateliers techniques'],[4,'projets professionnels'],[2,"ans d'alternance"],[5,'axes de veille']];
 const TERM=[
 ['omar@lab:~$ ','ping -c 2 10.0.10.1',['64 bytes from 10.0.10.1: icmp_seq=1 ttl=64 time=0.41 ms','64 bytes from 10.0.10.1: icmp_seq=2 ttl=64 time=0.38 ms']],
 ['omar@lab:~$ ','sudo systemctl status bind9',['<span class="ok">●</span> named.service - BIND Domain Name Server','   Active: <span class="ok">active (running)</span>']],
 ['omar@lab:~$ ','dig +short srv-ad01.lab.local',['10.0.10.10']],
-['omar@konoha:~$ ','echo "Vive la Tunisie"',['Vive la Tunisie ! Dattebayo !']],
+['omar@bazar:~$ ','echo "Visca Barça, Dattebayo, Nakama, Vive la Tunisie"',['Visca Barça ! Dattebayo ! Nakama ! Vive la Tunisie !']],
 ['PS C:\\> ','Get-ADUser -Filter * | Measure-Object',['Count : 42']],
 ['omar@lab:~$ ','sudo apt update && sudo apt upgrade -y',['Lecture des listes de paquets... Fait','0 mis à jour, 0 nouvellement installés.']]];
 const ATELIERS=[
@@ -569,10 +589,13 @@ const ro=new ResizeObserver(draw);ro.observe(s);
 show();
 if(document.fonts)document.fonts.ready.then(()=>{const a=links.find(x=>x.hasAttribute('aria-current'));if(a)movePill(a)});
 }
-;{const RMq=matchMedia('(prefers-reduced-motion:reduce)').matches;const cols=['#e70013','#ffffff','#ff8a1f','#ffb04a'];
+;{const RMq=matchMedia('(prefers-reduced-motion:reduce)').matches;const cols=['#e70013','#ffffff','#ff8a1f','#004d98','#a50044','#f7c948','#2e9bd6'];
 const boom=(x,y)=>{if(RMq)return;for(let i=0;i<90;i++){const d=document.createElement('i');d.className='cf';d.style.background=cols[i%4];d.style.left=x+'px';d.style.top=y+'px';document.body.appendChild(d);const a=Math.random()*Math.PI*2,v=150+Math.random()*420;d.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${Math.cos(a)*v}px,${Math.sin(a)*v+260}px) rotate(${Math.random()*900}deg)`,opacity:0}],{duration:1400+Math.random()*900,easing:'cubic-bezier(.2,.7,.3,1)'}).onfinish=()=>d.remove()}};
 const f=document.getElementById('fan');if(f)f.addEventListener('click',e=>{const r=f.getBoundingClientRect();boom(r.left+r.width/2,r.top);boom(innerWidth/2,innerHeight/3)});
 document.addEventListener('click',e=>{if(e.target.closest('.logo,.btn'))boom(e.clientX,e.clientY)})}
+;{const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;const W=['VISCA BARÇA','DATTEBAYO','ONE PIECE','VIVA TUNISIA','NAKAMA','MÉS QUE UN CLUB','SHINOBI','FORÇA BARÇA'],C=['#e70013','#ff8a1f','#f7c948','#2e9bd6','#fff'];
+const fb=document.getElementById('fan');if(fb){const L=['Visca el Barça !','Dattebayo !','Gomu Gomu !','Vive la Tunisie !'];let n=0;const sv=fb.querySelector('svg');fb.addEventListener('click',()=>{n=(n+1)%L.length;fb.textContent=' '+L[n];if(sv)fb.prepend(sv)})}
+if(!RM)setInterval(()=>{if(document.hidden)return;const e=document.createElement('span');e.textContent=W[Math.random()*W.length|0];e.style.cssText='position:fixed;z-index:-1;pointer-events:none;font:900 '+(14+Math.random()*22|0)+'px Inter,sans-serif;white-space:nowrap;color:'+C[Math.random()*C.length|0]+';left:'+(Math.random()*90|0)+'vw;top:100vh;opacity:.4';document.body.appendChild(e);const r=(Math.random()*40-20)|0;e.animate([{transform:'translateY(0) rotate('+r+'deg)',opacity:0},{opacity:.45,offset:.15},{transform:'translateY(-115vh) rotate('+(r*2)+'deg)',opacity:0}],{duration:9000+Math.random()*6000,easing:'linear'}).onfinish=()=>e.remove()},1100)}
 </script>
 <button class="fan" id="fan"><svg style="vertical-align:-4px;margin-right:6px;border-radius:3px" viewBox="0 0 900 600" width="22" aria-hidden="true"><rect width="900" height="600" fill="#e70013"/><circle cx="450" cy="300" r="150" fill="#fff"/><circle cx="450" cy="300" r="110" fill="#e70013"/><circle cx="478" cy="300" r="90" fill="#fff"/><polygon points="521.4,259.5 511.0,293.8 539.6,315.5 503.8,316.2 492.0,350.0 480.2,316.2 444.4,315.5 473.0,293.8 462.6,259.5 492.0,280.0" fill="#e70013" stroke="#e70013"/></svg>Vive la Tunisie !</button>
 </body>

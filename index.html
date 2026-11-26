@@ -255,6 +255,11 @@ footer{border-image:repeating-linear-gradient(90deg,#e70013 0 24px,#fff 24px 48p
 @keyframes bob{from{transform:translateY(0) rotate(var(--r))}to{transform:translateY(-14px) rotate(calc(var(--r)*-1))}}
 @media (prefers-reduced-motion:reduce){.stk img{animation:none;transform:rotate(var(--r))}}
 
+/* PERSOS */
+.crew{position:fixed;inset:0;z-index:-1;pointer-events:none}
+.fc{position:absolute;width:56px;height:56px;border-radius:50%;background:url(faces.jpg) 0 0/728px 56px;border:3px solid #ff8a1f;box-shadow:0 6px 18px #000a;opacity:.95}
+.fc.op{border-color:#f7c948}
+
 </style>
 </head>
 <body>
@@ -596,6 +601,10 @@ document.addEventListener('click',e=>{if(e.target.closest('.logo,.btn'))boom(e.c
 ;{const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;const W=['VISCA BARÇA','DATTEBAYO','ONE PIECE','VIVA TUNISIA','NAKAMA','MÉS QUE UN CLUB','SHINOBI','FORÇA BARÇA'],C=['#e70013','#ff8a1f','#f7c948','#2e9bd6','#fff'];
 const fb=document.getElementById('fan');if(fb){const L=['Visca el Barça !','Dattebayo !','Gomu Gomu !','Vive la Tunisie !'];let n=0;const sv=fb.querySelector('svg');fb.addEventListener('click',()=>{n=(n+1)%L.length;fb.textContent=' '+L[n];if(sv)fb.prepend(sv)})}
 if(!RM)setInterval(()=>{if(document.hidden)return;const e=document.createElement('span');e.textContent=W[Math.random()*W.length|0];e.style.cssText='position:fixed;z-index:-1;pointer-events:none;font:900 '+(14+Math.random()*22|0)+'px Inter,sans-serif;white-space:nowrap;color:'+C[Math.random()*C.length|0]+';left:'+(Math.random()*90|0)+'vw;top:100vh;opacity:.4';document.body.appendChild(e);const r=(Math.random()*40-20)|0;e.animate([{transform:'translateY(0) rotate('+r+'deg)',opacity:0},{opacity:.45,offset:.15},{transform:'translateY(-115vh) rotate('+(r*2)+'deg)',opacity:0}],{duration:9000+Math.random()*6000,easing:'linear'}).onfinish=()=>e.remove()},1100)}
+;{const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;const N=['Franky','Luffy','Sanji','Robin','Usopp','Nami','Zoro','Chopper','Kakashi','Iruka','Sakura','Naruto','Sasuke'];
+const box=document.createElement('div');box.className='crew';box.setAttribute('aria-hidden','true');
+N.forEach((n,i)=>{const d=document.createElement('div');d.className='fc '+(i<8?'op':'na');d.title=n;d.style.cssText='background-position:'+(-i*56)+'px 0;left:'+(((i*37)%84)+3)+'vw;top:'+(((i*53)%62)+14)+'vh';box.appendChild(d);if(!RM){const dx=(i%2?1:-1)*(6+(i*5)%10),dy=(i%3?1:-1)*(5+(i*7)%9);d.animate([{transform:'translate(0,0) rotate(-6deg)'},{transform:'translate('+dx+'vw,'+dy+'vh) rotate(8deg)'}],{duration:9000+(i*1300)%7000,direction:'alternate',iterations:Infinity,easing:'ease-in-out'})}});
+document.body.appendChild(box)}
 </script>
 <button class="fan" id="fan"><svg style="vertical-align:-4px;margin-right:6px;border-radius:3px" viewBox="0 0 900 600" width="22" aria-hidden="true"><rect width="900" height="600" fill="#e70013"/><circle cx="450" cy="300" r="150" fill="#fff"/><circle cx="450" cy="300" r="110" fill="#e70013"/><circle cx="478" cy="300" r="90" fill="#fff"/><polygon points="521.4,259.5 511.0,293.8 539.6,315.5 503.8,316.2 492.0,350.0 480.2,316.2 444.4,315.5 473.0,293.8 462.6,259.5 492.0,280.0" fill="#e70013" stroke="#e70013"/></svg>Vive la Tunisie !</button>
 </body>

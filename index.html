@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio Omar Ouerfelli</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE portfolio SISR qui en met plein la vue, comme un centre d'opérations réseau
+   IDEA un NOC la nuit : le fond est un réseau vivant, des paquets circulent, un terminal tourne
+   PICTURE canvas plein écran de nœuds connectés qui réagit à la souris + terminal animé + plan du lab
+   COLOUR nuit #060a13, bleu électrique #3b82ff, cyan #22d3ee, ambre #ffb400 pour l'accent, verre sombre
+   TYPE Figtree 900 + Figtree, JetBrains Mono pour le terminal
+   LAYOUT 5 onglets Wix ; héros nom + rôle tapé à gauche, terminal à droite ; sections en verre ; téléphone : tout empilé */
+:root{color-scheme:dark;--bg:#060a13;--ink:#eef3ff;--mute:#9aa7c2;--line:#ffffff1a;--glass:#0c1426e0;--blue:#3b82ff;--cyan:#22d3ee;--amber:#ffb400;--red:#ff5a5f;--green:#2ee59d}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:80px;background:var(--bg)}
+body{margin:0;background:transparent;color:var(--ink);font:16px/1.6 Figtree,system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}
+h1,h2,h3{margin:0;line-height:1.05;letter-spacing:-.02em;text-wrap:balance}
+h2{font-size:clamp(30px,4vw,46px);font-weight:900}
+h3{font-size:20px;font-weight:800;line-height:1.2}
+p{margin:0}
+.mute{color:var(--mute)}
+.mono{font-family:"JetBrains Mono",monospace}
+/* fond */
+#net{position:fixed;inset:0;width:100%;height:100%;z-index:-2}
+.aurora{position:fixed;inset:-20%;z-index:-3;pointer-events:none;animation:drift 22s ease-in-out infinite alternate;background:radial-gradient(40% 35% at 20% 25%,#1d4ed855,transparent 70%),radial-gradient(35% 30% at 80% 20%,#0e749044,transparent 70%),radial-gradient(45% 40% at 60% 85%,#1e3a8a55,transparent 70%)}
+@keyframes drift{to{transform:translate3d(6%,-4%,0) rotate(8deg) scale(1.1)}}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(transparent 0 calc(100% - 1px),#ffffff08 0) 0 0/100% 40px,linear-gradient(90deg,transparent 0 calc(100% - 1px),#ffffff08 0) 0 0/40px 100%;mask-image:radial-gradient(70% 60% at 50% 40%,#000,transparent)}
+#glow{position:fixed;width:520px;height:520px;left:0;top:0;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(#3b82ff22,transparent 65%);pointer-events:none;z-index:-1;transition:opacity .3s;opacity:0}
+/* nav */
+nav{position:sticky;top:12px;z-index:20;margin:12px max(4vw,12px) 0;border:1px solid var(--line);border-radius:18px;background:#08101fcc;backdrop-filter:blur(14px);padding:0 14px}
+nav .in{display:flex;align-items:center;gap:14px;min-height:62px;max-width:1240px;margin:0 auto}
+.logo{font-weight:900;font-size:18px;text-decoration:none;display:flex;align-items:center;gap:10px;flex:none}
+.logo i{width:30px;height:30px;border-radius:9px;background:conic-gradient(from var(--a,0deg),var(--blue),var(--cyan),var(--amber),var(--blue));display:grid;place-items:center;animation:spin 6s linear infinite}
+.logo i::after{content:"OO";font:900 11px Figtree;color:#fff;background:#08101f;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-style:normal}
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes spin{to{--a:360deg}}
+.tabs{display:flex;gap:2px;overflow-x:auto;margin-left:auto;scrollbar-width:none;position:relative;padding:6px 0}
+.tabs a{flex:none;position:relative;z-index:1;text-decoration:none;font-weight:600;font-size:15px;padding:10px 14px;color:var(--mute);border-radius:12px;transition:color .25s}
+.tabs a:hover,.tabs a[aria-current=page]{color:#fff}
+.pillbg{position:absolute;top:6px;bottom:6px;border-radius:12px;background:linear-gradient(135deg,#3b82ff,#22d3ee);box-shadow:0 6px 24px -6px #3b82ffaa;transition:left .45s cubic-bezier(.3,1.3,.4,1),width .45s cubic-bezier(.3,1.3,.4,1)}
+a:focus-visible,button:focus-visible,.st:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+/* transitions */
+#wipe{position:fixed;inset:0;z-index:30;pointer-events:none;background:linear-gradient(90deg,transparent,#22d3ee 48%,#fff 50%,#3b82ff 52%,transparent);transform:translateX(-100%);opacity:0}
+#wipe.go{animation:wipe .7s cubic-bezier(.6,0,.3,1)}
+@keyframes wipe{0%{opacity:1;transform:translateX(-100%) skewX(-12deg)}100%{opacity:1;transform:translateX(100%) skewX(-12deg)}}
+.view{display:none}
+.view.on{display:block}
+.js .rv{opacity:0;transform:translateY(28px) scale(.98);filter:blur(6px)}
+.rv.in{opacity:1;transform:none;filter:none;transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1),filter .8s;transition-delay:calc(var(--i,0)*90ms)}
+/* layout */
+.band{padding-block:clamp(48px,7vw,104px);padding-inline:max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:22px;backdrop-filter:blur(10px)}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--cyan);font-size:15px}
+.kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 #2ee59d;animation:ping 2s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 10px #2ee59d00}100%{box-shadow:0 0 0 0 #2ee59d00}}
+.grad{background:linear-gradient(100deg,#fff 20%,#9cc2ff 40%,#22d3ee 55%,#fff 75%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+@keyframes shine{to{background-position:-250% 0}}
+/* héros */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:center;padding-top:clamp(0px,3vw,40px)}
+.name{font-size:clamp(46px,7.4vw,96px);font-weight:900;line-height:.98;margin-top:16px}
+.name span{display:inline-block;opacity:0;transform:translateY(60%) rotate(8deg);animation:let .8s cubic-bezier(.2,.9,.2,1.2) forwards;animation-delay:calc(var(--d)*45ms + 200ms)}
+@keyframes let{to{opacity:1;transform:none}}
+.role{font-size:clamp(20px,2.4vw,28px);font-weight:600;margin-top:18px;min-height:1.6em}
+.role b{color:var(--cyan)}
+.caret{display:inline-block;width:3px;height:1em;background:var(--cyan);vertical-align:-.15em;margin-left:3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.lead{font-size:18px;color:var(--mute);max-width:58ch;margin-top:18px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:12px 22px;border-radius:14px;font:700 15px Figtree,sans-serif;text-decoration:none;border:0;cursor:pointer;color:#fff;background:linear-gradient(135deg,#3b82ff,#1d4ed8);box-shadow:0 10px 30px -10px #3b82ffcc,inset 0 1px 0 #ffffff33;transition:box-shadow .3s;will-change:transform}
+.btn:hover{box-shadow:0 16px 40px -10px #22d3eecc,inset 0 1px 0 #ffffff55}
+.btn.ghost{background:#ffffff0d;box-shadow:inset 0 0 0 1px var(--line)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1px var(--cyan),0 10px 30px -14px #22d3ee}
+.btn svg{width:16px;height:16px;flex:none}
+.term{overflow:hidden;box-shadow:0 40px 80px -30px #000,0 0 0 1px #ffffff12,0 0 60px -20px #3b82ff88}
+.term .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--mute)}
+.term .bar i{width:12px;height:12px;border-radius:50%}
+.term pre{margin:0;padding:18px 18px 22px;font:14px/1.75 "JetBrains Mono",monospace;height:330px;overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere;color:#cfe0ff}
+.term .p{color:var(--green)}.term .o{color:#7f8db0}.term .ok{color:var(--cyan)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:8px}
+.stat{padding:22px}
+.stat b{display:block;font-size:clamp(34px,4vw,52px);font-weight:900;line-height:1;background:linear-gradient(180deg,#fff,#7fb0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{color:var(--mute);font-size:15px}
+.marq{overflow:hidden;border-block:1px solid var(--line);padding:18px 0;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marq div{display:flex;gap:44px;width:max-content;animation:mq 32s linear infinite}
+.marq span{font-weight:800;font-size:22px;color:#c5d4f5;white-space:nowrap;display:flex;align-items:center;gap:44px}
+.marq span::after{content:"";width:8px;height:8px;border-radius:2px;background:var(--blue);transform:rotate(45deg)}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* cartes */
+.card{position:relative;padding:24px;display:flex;flex-direction:column;gap:12px;transform-style:preserve-3d;transition:transform .25s ease-out,border-color .3s;isolation:isolate}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%),#3b82ff2e,transparent 45%);opacity:0;transition:opacity .3s;z-index:-1}
+.card::after{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:conic-gradient(from var(--a),transparent 40%,var(--cyan),var(--blue),transparent 70%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;animation:spin 4s linear infinite;pointer-events:none}
+.card:hover::before,.card:hover::after{opacity:1}
+.g2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:30px}
+.head p{max-width:60ch;margin-top:12px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{border:1px solid var(--line);background:#ffffff08;border-radius:999px;padding:7px 14px;font-weight:600;font-size:14px;color:#d5e1ff}
+.pill{font-size:12px;font-weight:700;border-radius:999px;padding:4px 10px;background:#ffb40022;color:var(--amber);border:1px solid #ffb40055;align-self:flex-start}
+.ico{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,color-mix(in srgb,var(--c) 40%,transparent),transparent);border:1px solid color-mix(in srgb,var(--c) 50%,transparent)}
+.ico svg{width:24px;height:24px;stroke:var(--c);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* plan du lab */
+.fig{position:relative;height:420px}
+.fig>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.fig text{font:700 14px Figtree,sans-serif;fill:#fff;paint-order:stroke;stroke:#0a1222;stroke-width:6px}
+.fig text.sub{font-weight:400;font-size:13px;fill:var(--mute)}
+.st{cursor:pointer}.st .o{transition:transform .25s;transform-box:fill-box;transform-origin:center}.st:hover .o,.st:focus .o{transform:scale(1.3)}
+.halo{transform-box:fill-box;transform-origin:center;animation:halo 2.4s ease-out infinite}
+@keyframes halo{from{transform:scale(1);opacity:.7}to{transform:scale(3);opacity:0}}
+/* timeline */
+.tl{position:relative;padding-left:46px;display:grid;gap:26px}
+.tl::before{content:"";position:absolute;left:15px;top:6px;bottom:6px;width:3px;border-radius:2px;background:#ffffff14}
+.tl .fill{position:absolute;left:15px;top:6px;width:3px;border-radius:2px;background:linear-gradient(var(--cyan),var(--blue));height:0;transition:height 1.6s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 14px var(--cyan)}
+.tl.in .fill{height:calc(100% - 12px)}
+.tl .card::marker{display:none}
+.dot{position:absolute;left:-41px;top:26px;width:24px;height:24px;border-radius:50%;background:var(--bg);border:4px solid var(--cyan);box-shadow:0 0 0 6px #22d3ee22}
+.yr{font:600 14px "JetBrains Mono",monospace;color:var(--cyan)}
+.org{display:grid;grid-template-columns:80px minmax(0,1fr);gap:20px}
+.org .ico{width:80px;height:80px;border-radius:22px}
+.org .ico svg{width:38px;height:38px}
+.cv{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;padding:clamp(24px,3vw,40px);background:linear-gradient(120deg,#1d4ed8cc,#0e7490cc);border:1px solid #ffffff2a;border-radius:24px;position:relative;overflow:hidden}
+.cv::before{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:-80px;top:-140px;background:radial-gradient(#ffffff40,transparent 65%);animation:drift 8s ease-in-out infinite alternate}
+.cv .btn{background:#fff;color:#0b2a6b}
+/* carrousel */
+.car{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:20px max(4px,calc(50% - min(180px,40%))) 30px;scrollbar-width:none;perspective:1200px}
+.car>article{scroll-snap-align:center;flex:0 0 min(360px,80%);transition:transform .4s,opacity .4s}
+.car>article.dim{opacity:.45;transform:scale(.92) rotateY(var(--ry,0deg))}
+.ill{height:170px;border-radius:16px;background:radial-gradient(120% 100% at 50% 0%,#15254a,#0a1222);border:1px solid var(--line);overflow:hidden;position:relative}
+.ill svg{position:absolute;inset:0;width:100%;height:100%}
+.ctrl{display:flex;align-items:center;gap:12px}
+.ctrl button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#ffffff0a;color:#fff;cursor:pointer;display:grid;place-items:center;transition:background .2s,transform .2s}
+.ctrl button:hover{background:#3b82ff44;transform:scale(1.08)}
+.ctrl output{font:600 15px "JetBrains Mono",monospace;min-width:70px;text-align:center}
+.dots{display:flex;gap:8px;justify-content:center}
+.dots button{width:10px;height:10px;padding:0;border-radius:5px;border:0;background:#ffffff26;cursor:pointer;transition:width .35s,background .35s}
+.dots button.on{width:30px;background:linear-gradient(90deg,var(--cyan),var(--blue))}
+.proj .card{padding:0;overflow:hidden}
+.proj .ill{border-radius:0;border:0;border-bottom:1px solid var(--line);height:190px}
+.proj .bd{padding:24px;display:flex;flex-direction:column;gap:12px;flex:1}
+.proj .bd .btn{margin-top:auto;align-self:flex-start}
+.proj .card.hi{border-color:var(--amber);box-shadow:0 0 0 3px #ffb40066,0 0 60px -10px #ffb400}
+.file{display:flex;gap:14px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#ffffff06}
+.file b{display:block;overflow-wrap:anywhere;font-size:14px}
+.file span{font-size:13px;color:var(--mute)}
+.comp{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.comp li{display:flex;gap:10px;align-items:flex-start;color:#d5e1ff}
+.comp li::before{content:"✓";flex:none;width:20px;height:20px;margin-top:2px;border-radius:6px;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#fff;font-size:12px;font-weight:900;display:grid;place-items:center}
+.radar{position:relative;aspect-ratio:1;max-width:420px;width:100%;margin-inline:auto;border-radius:50%;background:radial-gradient(circle,#0f1d3a 0 30%,#0a1428 30.5% 31%,#0f1d3a 31.5% 60%,#0a1428 60.5% 61%,#0f1d3a 61.5%);border:1px solid #22d3ee44;overflow:hidden;box-shadow:0 0 80px -20px #22d3ee88}
+.radar::before{content:"";position:absolute;inset:0;background:conic-gradient(from 0deg,#22d3ee00 0 300deg,#22d3ee66 360deg);animation:rot 3.2s linear infinite}
+.radar::after{content:"";position:absolute;inset:50% 0 auto;height:1px;background:#22d3ee33;box-shadow:0 0 0 0 transparent}
+@keyframes rot{to{transform:rotate(360deg)}}
+.blip{position:absolute;width:12px;height:12px;margin:-6px;border-radius:50%;background:var(--c);box-shadow:0 0 16px var(--c);animation:bl 3.2s infinite;animation-delay:var(--t)}
+@keyframes bl{0%,100%{opacity:.15;transform:scale(.6)}8%{opacity:1;transform:scale(1.3)}40%{opacity:.5;transform:scale(1)}}
+.radar .lock{position:absolute;inset:36%;display:grid;place-items:center;border-radius:50%;background:#0a1428;border:2px solid var(--cyan);z-index:1}
+.radar .lock svg{width:46%;stroke:var(--cyan);fill:none;stroke-width:2}
+.src{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.src a{font-size:13px;font-weight:700;text-decoration:none;padding:5px 11px;border-radius:8px;background:#ffffff0a;border:1px solid var(--line);transition:border-color .2s,background .2s}
+.src a:hover{border-color:var(--cyan);background:#22d3ee1a}
+.cert{border-style:dashed}
+.cert .badge{width:56px;height:56px;animation:float 4s ease-in-out infinite;animation-delay:var(--t)}
+@keyframes float{50%{transform:translateY(-8px) rotate(-4deg)}}
+footer{border-top:1px solid var(--line);background:#050810cc}
+footer .wrap{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:28px}
+footer a{text-decoration:none}footer a:hover{color:var(--cyan)}
+.fl{display:grid;gap:8px;font-size:15px;align-content:start}
+.copy{max-width:1240px;margin:30px auto 0;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.ph{padding-top:clamp(48px,7vw,96px)}
+.ph h1{font-size:clamp(46px,7vw,88px);font-weight:900;margin-top:14px}
+@media(max-width:900px){.hero,.g3{grid-template-columns:minmax(0,1fr)}.g4,.stats{grid-template-columns:repeat(2,minmax(0,1fr))}footer .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.hero{min-height:0}}
+@media(max-width:600px){.g2,footer .wrap{grid-template-columns:minmax(0,1fr)}.fig{height:580px}.tabs a{padding:10px 9px;font-size:14px}.logo span{display:none}nav{margin-inline:8px}.term pre{height:280px;font-size:13px}.org{grid-template-columns:56px minmax(0,1fr)}.org .ico{width:56px;height:56px}#glow{display:none}}
+@media(hover:none){#glow{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.name span{opacity:1;transform:none}.js .rv{opacity:1;transform:none;filter:none}.marq div{animation:none}}
+</style>
+</head>
+<body>
+<div class="aurora"></div><canvas id="net" aria-hidden="true"></canvas><div class="grain"></div><div id="glow"></div><div id="wipe"></div>
+
+<nav><div class="in">
+<a class="logo" href="#accueil"><i></i><span>Omar Ouerfelli</span></a>
+<div class="tabs" id="tabs"><span class="pillbg" id="pill"></span>
+<a href="#accueil">Accueil</a><a href="#introduction">Introduction</a><a href="#epreuves">Épreuves</a><a href="#ateliers-pro">Ateliers Pro</a><a href="#veille-tech">Veille Tech</a>
+</div></div></nav>
+
+<main>
+<!-- ================= ACCUEIL ================= -->
+<section class="view" id="v-accueil">
+<div class="band"><div class="wrap hero">
+<div>
+<span class="kicker rv">BTS SIO · option SISR · en alternance</span>
+<h1 class="name" id="name" aria-label="Omar Ouerfelli">Omar Ouerfelli</h1>
+<p class="role rv" style="--i:2"><span class="grad" style="font-weight:800">Portfolio Informatique</span> · <b id="type"></b><span class="caret"></span></p>
+<p class="lead rv" style="--i:3">Étudiant en BTS SIO option SISR, spécialisé dans l'administration des systèmes et réseaux, avec un intérêt marqué pour la cybersécurité.</p>
+<div class="ctas rv" style="--i:4">
+<a class="btn mag" href="#ateliers-pro">Voir mes projets <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10m-4-4 4 4-4 4"/></svg></a>
+<a class="btn ghost mag" href="#introduction">Mon parcours</a>
+</div>
+</div>
+<div class="glass term rv" style="--i:3">
+<div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="mono" style="margin-left:8px">omar@lab-sisr : ~</span></div>
+<pre id="term" aria-label="Terminal de démonstration"></pre>
+</div>
+</div></div>
+
+<div class="marq" aria-hidden="true"><div id="marq"></div></div>
+
+<div class="band"><div class="wrap">
+<div class="stats" id="stats"></div>
+</div></div>
+
+<div class="band" style="padding-top:0"><div class="wrap g2" style="align-items:center">
+<div class="rv"><h2>Présentation</h2>
+<p class="lead">J'ai 20 ans et je suis en BTS SIO option SISR. J'ai développé des compétences en administration système, en déploiement d'infrastructures et en gestion des services réseau.</p>
+<p class="lead" style="margin-top:12px">La protection des données et la cybersécurité me passionnent : je les intègre dès la conception de chacun de mes projets.</p>
+<div class="tags" style="margin-top:22px"><span class="tag">Cybersécurité</span><span class="tag">Réseaux &amp; Systèmes</span><span class="tag">Infrastructures</span><span class="tag">Parcours SISR</span></div>
+</div>
+<div class="glass rv" style="--i:2;padding:18px 18px 8px">
+<p class="mono mute" style="font-size:13px;padding:4px 6px 0">Mon lab · clique sur un équipement</p>
+<div class="fig"><svg id="map" role="img" aria-label="Plan du réseau de mes projets, chaque équipement ouvre le projet correspondant"></svg></div>
+</div>
+</div></div>
+
+<div class="band" style="padding-top:0"><div class="wrap">
+<div class="head rv"><div><h2>Certifications</h2><p class="mute">Les certifications que je prépare apparaîtront ici dès leur obtention.</p></div></div>
+<div class="g4" id="certs"></div>
+</div></div>
+</section>
+
+<!-- ================= INTRODUCTION ================= -->
+<section class="view" id="v-introduction">
+<div class="band ph"><div class="wrap">
+<span class="kicker rv">Qui je suis</span>
+<h1 class="rv grad" style="--i:1">Introduction</h1>
+<p class="lead rv" style="--i:2">Mon parcours, mon école, mon entreprise d'alternance et mon rôle au quotidien.</p>
+</div></div>
+
+<div class="band" style="padding-top:0"><div class="wrap g2" style="align-items:start">
+<div class="rv"><h2>Mon cursus</h2><p class="lead">Deux étapes, une même direction : l'infrastructure et la sécurité.</p></div>
+<div class="tl" id="tl"><span class="fill"></span>
+<article class="glass card rv" style="--i:1"><span class="dot"></span><span class="yr">2025 – 2027</span><h3>BTS SIO option SISR · Schola Nova, en alternance</h3><p class="mute">Réseaux, systèmes, cybersécurité et virtualisation. J'y acquiers des compétences en administration, sécurisation, supervision et scripts à travers différents projets.</p></article>
+<article class="glass card rv" style="--i:2"><span class="dot"></span><span class="yr">2022 – 2025</span><h3>Baccalauréat général · Lycée Jacques Feyder</h3><p class="mute">Les fondamentaux des sciences et le raisonnement logique.</p></article>
+</div>
+</div></div>
+
+<div class="band" style="padding-top:0"><div class="wrap g2">
+<article class="glass card org rv" style="--c:var(--blue)"><div class="ico"><svg viewBox="0 0 24 24"><path d="M2 9 12 4l10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5M22 9v6"/></svg></div>
+<div><h2 style="font-size:30px">Mon école : Schola Nova</h2>
+<p class="mute" style="margin-top:12px">Établissement d'enseignement supérieur et professionnel situé à Paris, qui propose des cursus en informatique, numérique, électronique, commerce et gestion.</p>
+<p class="mute" style="margin-top:10px">L'école mise sur l'alternance, qui combine cours théoriques et expérience en entreprise, et accompagne ses étudiants jusqu'à l'insertion professionnelle.</p></div></article>
+<article class="glass card org rv" style="--i:1;--c:var(--amber)"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 12h18M12 8v13M12 8C10 3 6 4 7 6.5S12 8 12 8s4 .5 5-1.5S14 3 12 8"/></svg></div>
+<div><h2 style="font-size:30px">Mon entreprise : GIFT Education</h2>
+<p class="mute" style="margin-top:12px">Groupe présent depuis plus de 30 ans dans la formation, qui réunit plusieurs écoles sur différents campus en France : informatique, santé, aéronautique, commerce, beauté et métiers animaliers.</p>
+<p class="mute" style="margin-top:10px">Le groupe mutualise ses équipes pédagogiques et administratives, et vise l'employabilité de ses étudiants en restant au plus près du marché du travail.</p></div></article>
+</div></div>
+
+<div class="band" style="padding-top:0"><div class="wrap">
+<div class="head rv"><div><h2>Mon rôle</h2><p class="mute">Assistant applicatif et réseau en alternance, dans un environnement SI exigeant où je mets en avant mon autonomie, ma rigueur opérationnelle et mon esprit d'équipe.</p></div></div>
+<div class="g3">
+<article class="glass card rv" style="--i:1;--c:var(--cyan)"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2" y="14" width="5" height="6" rx="2"/><rect x="17" y="14" width="5" height="6" rx="2"/></svg></div><h3>Support technique</h3><p class="mute">Prise en charge des demandes et résolution des incidents des utilisateurs, suivis précisément grâce à HubSpot.</p></article>
+<article class="glass card rv" style="--i:2;--c:var(--blue)"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01"/></svg></div><h3>Administration des infrastructures</h3><p class="mute">Gestion et maintien en condition opérationnelle des systèmes et du réseau.</p></article>
+<article class="glass card rv" style="--i:3;--c:var(--green)"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Sécurisation des flux</h3><p class="mute">Protection des échanges de données et optimisation des processus internes.</p></article>
+</div>
+<div class="cv rv" style="margin-top:40px"><div style="position:relative"><h2>Mon CV</h2><p style="color:#dbe8ff;margin-top:6px">Formation, alternance et compétences techniques sur une page.</p></div>
+<a class="btn mag" href="https://316e6e07-6c1a-4bfa-9abd-3e8795150ea3.filesusr.com/ugd/65f82c_55b91ed5c52b4c7883b8869e41f5b65b.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v9m-4-4 4 4 4-4M2 14h12"/></svg>Télécharger le CV</a></div>
+</div></div>
+</section>
+
+<!-- ================= ÉPREUVES ================= -->
+<section class="view" id="v-epreuves">
+<div class="band ph"><div class="wrap">
+<span class="kicker rv">Épreuve E4</span>
+<h1 class="rv grad" style="--i:1">Épreuves</h1>
+<p class="lead rv" style="--i:2">Le tableau de synthèse de mes réalisations et mes fiches de pratiques professionnelles.</p>
+</div></div>
+<div class="band" style="padding-top:0"><div class="wrap">
+<h2 class="rv" style="margin-bottom:26px">Tableau de synthèse</h2>
+<article class="glass card rv g2" style="display:grid;align-items:center;--i:1">
+<div style="display:grid;gap:14px"><p class="mute">Il relie chacune de mes réalisations aux compétences du bloc 1 du référentiel :</p>
+<ul class="comp"><li>Gérer le patrimoine informatique</li><li>Répondre aux incidents et aux demandes d'assistance</li><li>Développer la présence en ligne de l'organisation</li><li>Travailler en mode projet</li><li>Mettre à disposition un service informatique</li><li>Organiser son développement professionnel</li></ul></div>
+<div style="display:grid;gap:16px">
+<div class="file"><svg width="36" height="44" viewBox="0 0 36 44" aria-hidden="true"><path d="M2 2h22l10 10v30H2z" fill="#1f9d63"/><path d="M24 2v10h10" fill="#146b43"/><path d="M10 22l12 14m0-14L10 36" stroke="#fff" stroke-width="3"/></svg><div><b>Tableau_synthese_E4_Omar_maj_competences_entreprise.xlsx</b><span>Classeur Excel</span></div></div>
+<a class="btn mag" style="justify-self:start" href="Tableau_synthese_E4_Omar.xlsx" download="Tableau_synthese_E4_Omar.xlsx"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v9m-4-4 4 4 4-4M2 14h12"/></svg>Télécharger le tableau</a></div>
+</article>
+<h2 class="rv" style="margin:64px 0 26px">Pratiques professionnelles</h2>
+<div class="g2">
+<article class="glass card rv" style="--i:1"><div class="ill" id="ill-net"></div><h3>Fiche réseau</h3><p class="mute">Document technique relatif aux infrastructures réseau : architecture, adressage, VLAN et filtrage.</p><a class="btn ghost mag" style="align-self:flex-start" href="https://omarouerfelli2021.wixsite.com/portfolio-profession/epreuves">Voir la fiche réseau</a></article>
+<article class="glass card rv" style="--i:2"><div class="ill" id="ill-sys"></div><h3>Fiche système</h3><p class="mute">Document technique relatif au déploiement et à la gestion des systèmes : serveurs, services et postes clients.</p><a class="btn ghost mag" style="align-self:flex-start" href="https://omarouerfelli2021.wixsite.com/portfolio-profession/epreuves">Voir la fiche système</a></article>
+</div>
+</div></div>
+</section>
+
+<!-- ================= ATELIERS PRO ================= -->
+<section class="view" id="v-ateliers-pro">
+<div class="band ph"><div class="wrap">
+<span class="kicker rv">Réalisations techniques</span>
+<h1 class="rv grad" style="--i:1">Ateliers Pro</h1>
+<p class="lead rv" style="--i:2">Une sélection de réalisations techniques qui illustrent mes compétences en administration système et réseau.</p>
+</div></div>
+<div class="band" style="padding-top:0"><div class="wrap">
+<div class="head rv"><h2>Projets ateliers</h2>
+<div class="ctrl"><button id="prev" aria-label="Précédent"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3 5 8l5 5"/></svg></button><output id="count" class="mono">1 / 6</output><button id="next" aria-label="Suivant"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 3 5 5-5 5"/></svg></button></div></div>
+<div class="car rv" style="--i:1" id="car" tabindex="0" aria-label="Carrousel des projets ateliers, flèches gauche et droite pour naviguer"></div>
+<div class="dots" id="dots"></div>
+</div></div>
+<div class="band" style="padding-top:0"><div class="wrap">
+<div class="head rv"><div><h2>Mes projets ateliers</h2><p class="mute">Une exploration technique à travers des mises en situation professionnelles.</p></div></div>
+<div class="g2 proj" id="proj"></div>
+</div></div>
+</section>
+
+<!-- ================= VEILLE TECH ================= -->
+<section class="view" id="v-veille-tech">
+<div class="band ph"><div class="wrap g2" style="align-items:center">
+<div><span class="kicker rv">Focus cybersécurité</span>
+<h1 class="rv grad" style="--i:1">Veille Tech</h1>
+<p class="lead rv" style="--i:2">Protéger les données d'une entreprise face aux menaces numériques est le défi qui m'intéresse le plus. Je m'entraîne sur des CTF et des labs, et je suis l'actualité par des articles et des vidéos pour comprendre les mécanismes d'attaque et de défense.</p></div>
+<div class="radar rv" style="--i:2" aria-hidden="true">
+<span class="blip" style="left:28%;top:30%;--c:var(--red);--t:.4s"></span><span class="blip" style="left:74%;top:36%;--c:var(--amber);--t:1.1s"></span><span class="blip" style="left:66%;top:76%;--c:var(--green);--t:1.9s"></span><span class="blip" style="left:22%;top:68%;--c:var(--cyan);--t:2.6s"></span>
+<div class="lock"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+</div>
+</div></div>
+<div class="band" style="padding-top:0"><div class="wrap">
+<h2 class="rv" style="margin-bottom:26px">Ma veille technique</h2>
+<div class="g3" id="veille"></div>
+</div></div>
+</section>
+</main>
+
+<footer class="band" style="padding-block:48px 28px"><div class="wrap">
+<div><a class="logo" href="#accueil"><i></i>Omar Ouerfelli</a><p class="mute" style="margin-top:12px">Portfolio professionnel · BTS SIO option SISR</p></div>
+<div class="fl"><b>Contact</b><span class="mute">hello@it-portfolio.fr</span><span class="mute">Paris, France</span></div>
+<div class="fl"><b>Réseaux</b><a class="mute" href="https://www.linkedin.com/">LinkedIn</a><a class="mute" href="https://www.instagram.com/">Instagram</a></div>
+</div>
+<div class="copy"><span>© 2026 Portfolio Professionnel. Tous droits réservés.</span><span>Conçu avec passion pour l'innovation</span></div>
+</footer>
+
+<script>
+{
+document.documentElement.classList.add('js');
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=id=>document.getElementById(id);
+
+/* ================= Contenu (tout le texte à modifier est ici) ================= */
+const WIX='https://omarouerfelli2021.wixsite.com/portfolio-profession/ateliers-pro';
+const ROLES=['Administration systèmes','Réseaux & infrastructures','Cybersécurité','Windows Server & Linux'];
+const STACK=['Debian','Windows Server','Active Directory','pfSense','DNS','DHCP','GPO','Apache','VLAN','Docker','HubSpot','Virtualisation'];
+const STATS=[[6,'ateliers techniques'],[4,'projets professionnels'],[2,"ans d'alternance"],[5,'axes de veille']];
+const TERM=[
+['omar@lab:~$ ','ping -c 2 10.0.10.1',['64 bytes from 10.0.10.1: icmp_seq=1 ttl=64 time=0.41 ms','64 bytes from 10.0.10.1: icmp_seq=2 ttl=64 time=0.38 ms']],
+['omar@lab:~$ ','sudo systemctl status bind9',['<span class="ok">●</span> named.service - BIND Domain Name Server','   Active: <span class="ok">active (running)</span>']],
+['omar@lab:~$ ','dig +short srv-ad01.lab.local',['10.0.10.10']],
+['PS C:\\> ','Get-ADUser -Filter * | Measure-Object',['Count : 42']],
+['omar@lab:~$ ','sudo apt update && sudo apt upgrade -y',['Lecture des listes de paquets... Fait','0 mis à jour, 0 nouvellement installés.']]];
+const ATELIERS=[
+{t:'Infrastructure Linux',d:'Installation et configuration de serveurs Debian, administration open source.',g:'linux'},
+{t:'Système Windows',d:'Déploiement et gestion de Windows Server en entreprise.',g:'win'},
+{t:'Client-Serveur',d:'Mise en place de services centralisés et gestion des postes clients.',g:'cs'},
+{t:'Active Directory',d:'Configuration des domaines, gestion des utilisateurs et application des GPO.',g:'ad'},
+{t:'Services DNS',d:'Résolution de noms, configuration des zones directes et inverses.',g:'dns'},
+{t:'Configuration DHCP',d:'Attribution automatique des adresses IP et gestion des baux.',g:'dhcp'}];
+const PROJETS=[
+{id:'pf',t:'pfSense',d:"Installation et configuration d'un pare-feu pour sécuriser le réseau d'une entreprise.",g:'fw',k:'Présentation .odt'},
+{id:'ad',t:'Windows Server AD',d:'Gestion centralisée des utilisateurs et des ressources avec Active Directory, déploiement de GPO.',g:'ad'},
+{id:'dns',t:'Config DNS Linux',d:"Administration de Debian : configuration d'Apache, du DNS et de serveurs mail sécurisés.",g:'linux'},
+{id:'dock',t:'Conteneurisation',d:'Conteneurisation des applications et automatisation des déploiements pour optimiser la production.',g:'dock',soon:true}];
+const VEILLE=[
+{t:'Bases de failles',d:'Je consulte régulièrement les registres CVE et la NVD pour repérer les vulnérabilités logicielles critiques.',c:'var(--red)',i:'<path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17h.01"/>',s:[['CVE','https://www.cve.org/'],['NVD','https://nvd.nist.gov/']]},
+{t:'Sources officielles',d:"Je suis les alertes de l'ANSSI et du CERT-FR pour connaître les menaces et les recommandations majeures.",c:'var(--blue)',i:'<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/>',s:[['ANSSI','https://cyber.gouv.fr/'],['CERT-FR','https://www.cert.ssi.gouv.fr/']]},
+{t:'Actualité infosec',d:"Pour l'actualité quotidienne, je lis Zataz, BleepingComputer et The Hacker News.",c:'var(--amber)',i:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h10M7 17h6"/>',s:[['Zataz','https://www.zataz.com/'],['BleepingComputer','https://www.bleepingcomputer.com/'],['The Hacker News','https://thehackernews.com/']]},
+{t:'Outils de veille',d:'Flux RSS avec Feedly, comptes spécialisés sur X et newsletters techniques.',c:'var(--green)',i:'<path d="M5 19a1 1 0 1 0 0-.01M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/>',s:[['Feedly','https://feedly.com/']]},
+{t:"Guides de l'ANSSI",d:"Les guides de bonnes pratiques et le guide d'hygiène informatique sont au cœur de ma démarche de sécurisation.",c:'var(--cyan)',i:'<path d="M4 4h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4zM20 4h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6z"/>',s:[["Guide d'hygiène",'https://cyber.gouv.fr/publications/guide-dhygiene-informatique']]},
+{t:'Entraînement',d:"CTF et labs pour pratiquer l'attaque et la défense dans un cadre légal et contrôlé.",c:'var(--red)',i:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',s:[]}];
+
+/* ================= Illustrations animées ================= */
+const T='#e8f0ff',B='#3b82ff',C='#22d3ee',A='#ffb400',Gn='#2ee59d',D='#1b2a4a';
+const G={
+linux:`<rect x="40" y="26" width="220" height="118" rx="10" fill="#08101f" stroke="${D}" stroke-width="2"/><circle cx="58" cy="42" r="4" fill="#ff5f57"/><circle cx="72" cy="42" r="4" fill="#febc2e"/><circle cx="86" cy="42" r="4" fill="#28c840"/><text x="56" y="78" fill="${Gn}" font-family="JetBrains Mono,monospace" font-size="14">$ apt install apache2</text><text x="56" y="102" fill="${C}" font-family="JetBrains Mono,monospace" font-size="14">● active (running)</text><rect x="56" y="114" width="10" height="16" fill="${T}"><animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/></rect>`,
+win:`<g>${[[96,22,B],[152,22,B],[96,78,B],[152,78,A]].map(([x,y,f],i)=>`<rect x="${x}" y="${y}" width="52" height="52" rx="6" fill="${f}"><animate attributeName="opacity" values="1;.35;1" dur="2.4s" begin="${i*.3}s" repeatCount="indefinite"/></rect>`).join('')}</g>`,
+cs:`<rect x="124" y="16" width="52" height="70" rx="6" fill="#08101f" stroke="${C}" stroke-width="2"/><g fill="${Gn}"><rect x="134" y="28" width="32" height="6" rx="2"/><rect x="134" y="42" width="32" height="6" rx="2"><animate attributeName="fill" values="${Gn};${A};${Gn}" dur="1.2s" repeatCount="indefinite"/></rect></g><g stroke="${B}" stroke-width="3" fill="none"><path id="cs1" d="M150 86v20H70v12"/><path d="M150 106h80v12M150 106v12"/></g><circle r="4" fill="${C}"><animateMotion dur="1.8s" repeatCount="indefinite" path="M150 86v20H70v12"/></circle><circle r="4" fill="${A}"><animateMotion dur="1.8s" begin=".9s" repeatCount="indefinite" path="M150 86v20h80v12"/></circle><g fill="${B}"><rect x="50" y="118" width="40" height="26" rx="4"/><rect x="130" y="118" width="40" height="26" rx="4"/><rect x="210" y="118" width="40" height="26" rx="4"/></g>`,
+ad:`<g stroke="${B}" stroke-width="3" fill="none"><path d="M150 46v22M80 68h140M80 68v20M150 68v20M220 68v20M80 100l-20 24M80 100l20 24M220 100l-20 24M220 100l20 24"/></g><circle cx="150" cy="32" r="16" fill="${B}"/><circle cx="150" cy="32" r="16" fill="none" stroke="${C}" stroke-width="2" class="halo"/><g fill="#08101f" stroke="${T}" stroke-width="3"><circle cx="80" cy="96" r="10"/><circle cx="150" cy="96" r="10"/><circle cx="220" cy="96" r="10"/></g><g fill="${A}"><circle cx="60" cy="130" r="7"/><circle cx="100" cy="130" r="7"/><circle cx="200" cy="130" r="7"/><circle cx="240" cy="130" r="7"/></g>`,
+dns:`<g fill="none" stroke="${B}" stroke-width="3"><circle cx="130" cy="82" r="52"/><ellipse cx="130" cy="82" rx="22" ry="52"><animate attributeName="rx" values="22;46;22" dur="4s" repeatCount="indefinite"/></ellipse><path d="M78 82h104M86 56h88M86 108h88"/></g><rect x="176" y="100" width="104" height="32" rx="7" fill="#08101f" stroke="${C}" stroke-width="2"/><text x="188" y="121" fill="${C}" font-family="JetBrains Mono,monospace" font-size="13">lab.local</text>`,
+dhcp:`<rect x="40" y="58" width="80" height="46" rx="7" fill="#08101f" stroke="${D}" stroke-width="2"/><circle cx="58" cy="81" r="5" fill="${Gn}"><animate attributeName="opacity" values="1;.2;1" dur=".8s" repeatCount="indefinite"/></circle><path d="M120 81h56" stroke="${C}" stroke-width="3" stroke-dasharray="6 6"><animate attributeName="stroke-dashoffset" from="24" to="0" dur=".8s" repeatCount="indefinite"/></path><path d="M176 55h80l14 26-14 26h-80z" fill="${A}"/><text x="186" y="86" fill="#08101f" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700">10.0.20.42</text>`,
+fw:`<g fill="#ff5a5f">${[0,1,2,3].flatMap(r=>[0,1,2,3,4,5,6].map(c=>`<rect x="${(r%2?-18:4)+c*44}" y="${18+r*32}" width="40" height="26" rx="3" opacity="${.55+((r*7+c)%5)*.09}"/>`)).join('')}</g><circle cx="150" cy="80" r="40" fill="#08101f" stroke="${Gn}" stroke-width="3"/><circle cx="150" cy="80" r="40" fill="none" stroke="${Gn}" stroke-width="2" class="halo"/><path d="M134 80l11 11 21-22" stroke="${Gn}" stroke-width="6" fill="none" stroke-linecap="round"/>`,
+dock:`<path d="M30 110h240c-8 34-48 50-110 50S40 150 30 110z" fill="${B}"/><g fill="${T}">${[[70,86],[100,86],[130,86],[160,86],[100,60],[130,60],[130,34]].map(([x,y],i)=>`<rect x="${x}" y="${y}" width="26" height="22" rx="3"><animate attributeName="y" values="${y-30};${y}" dur=".6s" begin="${i*.15}s" fill="freeze"/></rect>`).join('')}</g><path d="M0 150q25-10 50 0t50 0 50 0 50 0 50 0 50 0" stroke="${C}" stroke-width="3" fill="none"><animateTransform attributeName="transform" type="translate" values="0 0;-50 0" dur="2s" repeatCount="indefinite"/></path>`,
+net:`<g stroke="${B}" stroke-width="4" stroke-linecap="round"><path d="M40 85h70M190 85h70M150 60V20M150 110v40"/></g><rect x="110" y="62" width="80" height="46" rx="8" fill="${B}"/><g fill="${T}">${[0,1,2,3,4].map(i=>`<rect x="${122+i*12}" y="78" width="8" height="14" rx="1"><animate attributeName="fill" values="${T};${Gn};${T}" dur="1.5s" begin="${i*.2}s" repeatCount="indefinite"/></rect>`).join('')}</g><g fill="#08101f" stroke="${C}" stroke-width="3"><circle cx="30" cy="85" r="10"/><circle cx="270" cy="85" r="10"/><circle cx="150" cy="14" r="8"/><circle cx="150" cy="154" r="8"/></g>${['M40 85h70','M260 85h-70','M150 22v38','M150 146v-36'].map((p,i)=>`<circle r="4" fill="${A}"><animateMotion dur="1.4s" begin="${i*.35}s" repeatCount="indefinite" path="${p}"/></circle>`).join('')}`,
+sys:`${[0,1,2].map(i=>`<rect x="80" y="${16+i*46}" width="140" height="38" rx="7" fill="#08101f" stroke="${D}" stroke-width="2"/><circle cx="100" cy="${35+i*46}" r="5" fill="${i===2?A:Gn}"><animate attributeName="opacity" values="1;.3;1" dur="${1+i*.4}s" repeatCount="indefinite"/></circle><rect x="120" y="${31+i*46}" width="80" height="8" rx="4" fill="${D}"/><rect x="120" y="${31+i*46}" width="80" height="8" rx="4" fill="${C}"><animate attributeName="width" values="10;80;40;70;10" dur="${3+i}s" repeatCount="indefinite"/></rect>`).join('')}`};
+const ill=k=>`<svg viewBox="0 0 300 170" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${G[k]}</svg>`;
+
+/* ================= Rendu ================= */
+$('name').innerHTML=[...'Omar Ouerfelli'].map((c,i)=>c===' '?'<br>':`<span style="--d:${i}" aria-hidden="true">${c}</span>`).join('');
+$('marq').innerHTML=[...STACK,...STACK].map(s=>`<span>${s}</span>`).join('');
+$('stats').innerHTML=STATS.map(([n,l],i)=>`<div class="glass card stat rv" style="--i:${i}"><b data-n="${n}">0</b><span>${l}</span></div>`).join('');
+$('certs').innerHTML=[1,2,3,4].map(i=>`<article class="glass card cert rv" style="--i:${i}"><svg class="badge" style="--t:${i*.4}s" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="22" r="17" fill="none" stroke="#3b82ff" stroke-width="3" stroke-dasharray="7 5"/><circle cx="28" cy="22" r="8" fill="#3b82ff33"/><path d="M17 35l-5 15 9-5 7 7V38M39 35l5 15-9-5-7 7" fill="#22d3ee55"/></svg><span class="pill">En préparation</span><h3>Certification ${i}</h3><p class="mute">Nom, organisme et année ajoutés à l'obtention.</p></article>`).join('');
+$('car').innerHTML=ATELIERS.map(a=>`<article class="glass card"><div class="ill">${ill(a.g)}</div><h3>${a.t}</h3><p class="mute">${a.d}</p></article>`).join('');
+$('dots').innerHTML=ATELIERS.map((a,i)=>`<button aria-label="Aller à ${a.t}" data-i="${i}"></button>`).join('');
+$('proj').innerHTML=PROJETS.map((p,i)=>`<article class="glass card rv" id="p-${p.id}" style="--i:${i}"><div class="ill">${ill(p.g)}</div><div class="bd"><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><h3>${p.t}</h3>${p.soon?'<span class="pill">À venir</span>':''}</div><p class="mute">${p.d}</p>${p.soon?'':`<a class="btn mag" href="${WIX}">Voir le projet${p.k?` · ${p.k}`:''}</a>`}</div></article>`).join('');
+$('veille').innerHTML=VEILLE.map((v,i)=>`<article class="glass card rv" style="--i:${i%3};--c:${v.c}"><div class="ico"><svg viewBox="0 0 24 24">${v.i}</svg></div><h3>${v.t}</h3><p class="mute">${v.d}</p>${v.s.length?`<div class="src">${v.s.map(([n,u])=>`<a href="${u}">${n}</a>`).join('')}</div>`:''}</article>`).join('');
+$('ill-net').innerHTML=ill('net');$('ill-sys').innerHTML=ill('sys');
+
+/* ================= Fond : réseau vivant ================= */
+const cv=$('net'),cx=cv.getContext('2d');let W=0,H=0,pts=[],pk=[],mouse={x:-999,y:-999};
+const size=()=>{const r=devicePixelRatio||1;W=innerWidth;H=innerHeight;cv.width=W*r;cv.height=H*r;cx.setTransform(r,0,0,r,0,0);const n=Math.min(110,Math.round(W*H/15000));pts=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.6+1}))};
+const LINK=140;
+const frame=()=>{
+cx.clearRect(0,0,W,H);
+for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;const dx=mouse.x-p.x,dy=mouse.y-p.y,d=Math.hypot(dx,dy);if(d<180){p.x+=dx*.004;p.y+=dy*.004}}
+for(let i=0;i<pts.length;i++){const a=pts[i];for(let j=i+1;j<pts.length;j++){const b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<LINK){cx.strokeStyle=`rgba(80,140,255,${(1-d/LINK)*.35})`;cx.lineWidth=1;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke();if(!RM&&Math.random()<.0009&&pk.length<26)pk.push({a,b,t:0})}}
+const dm=Math.hypot(a.x-mouse.x,a.y-mouse.y);if(dm<180){cx.strokeStyle=`rgba(34,211,238,${(1-dm/180)*.6})`;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(mouse.x,mouse.y);cx.stroke()}}
+for(const p of pts){cx.fillStyle='rgba(170,200,255,.85)';cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fill()}
+pk=pk.filter(k=>(k.t+=.018)<1);
+for(const k of pk){const x=k.a.x+(k.b.x-k.a.x)*k.t,y=k.a.y+(k.b.y-k.a.y)*k.t;cx.fillStyle='#22d3ee';cx.shadowColor='#22d3ee';cx.shadowBlur=12;cx.beginPath();cx.arc(x,y,2.4,0,7);cx.fill();cx.shadowBlur=0}
+if(!RM&&!document.hidden)requestAnimationFrame(frame);
+};
+size();addEventListener('resize',size);frame();
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!RM)requestAnimationFrame(frame)});
+const glow=$('glow');
+addEventListener('pointermove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;glow.style.opacity=1;glow.style.transform=`translate(${e.clientX}px,${e.clientY}px)`},{passive:true});
+document.addEventListener('pointerleave',()=>{mouse.x=mouse.y=-999});
+
+/* ================= Effets ================= */
+// apparition au défilement
+const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);if(e.target.dataset.n!==undefined)count(e.target)}}),{threshold:.15}):null;
+const watch=root=>root.querySelectorAll('.rv,.tl,[data-n]').forEach(el=>{if(io)io.observe(el);else{el.classList.add('in')}});
+// compteurs
+const count=el=>{const n=+el.dataset.n,t0=performance.now();const step=t=>{const k=Math.min(1,(t-t0)/1400);el.textContent=Math.round(n*(1-(1-k)**3));if(k<1)requestAnimationFrame(step)};RM?el.textContent=n:requestAnimationFrame(step)};
+// cartes : lumière qui suit la souris + inclinaison 3D
+const fine=matchMedia('(hover:hover)').matches&&!RM;
+document.addEventListener('pointermove',e=>{const c=e.target.closest?.('.card');if(!c)return;const r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;c.style.setProperty('--mx',x+'px');c.style.setProperty('--my',y+'px');if(fine&&!c.closest('.car')){const rx=(y/r.height-.5)*-6,ry=(x/r.width-.5)*6;c.style.transform=`perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`}},{passive:true});
+document.addEventListener('pointerout',e=>{const c=e.target.closest?.('.card');if(c&&!c.contains(e.relatedTarget))c.style.transform=''});
+// boutons magnétiques
+if(fine)document.querySelectorAll('.mag').forEach(b=>{b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.25}px,${(e.clientY-r.top-r.height/2)*.35}px)`});b.addEventListener('pointerleave',()=>{b.style.transform=''})});
+// rôle tapé
+{let r=0,i=0,del=false;const el=$('type');const tick=()=>{const w=ROLES[r];el.textContent=w.slice(0,i);if(!del&&i<w.length)i++;else if(!del){del=true;return setTimeout(tick,1600)}else if(i>0)i--;else{del=false;r=(r+1)%ROLES.length}setTimeout(tick,del?40:75)};RM?el.textContent=ROLES[0]:tick()}
+// terminal
+{const pre=$('term');let lines=[];const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const paint=(cur)=>{pre.innerHTML=lines.slice(-12).join('\n')+(cur!==undefined?'\n'+cur:'')};
+const run=async()=>{const sl=ms=>new Promise(r=>setTimeout(r,ms));for(;;){for(const [p,cmd,out] of TERM){for(let k=0;k<=cmd.length;k++){paint(`<span class="p">${esc(p)}</span>${esc(cmd.slice(0,k))}<span class="caret"></span>`);await sl(38+Math.random()*50)}lines.push(`<span class="p">${esc(p)}</span>${esc(cmd)}`);await sl(260);for(const o of out){lines.push(`<span class="o">${o}</span>`);paint();await sl(120)}await sl(900)}}};
+if(RM){TERM.forEach(([p,c,o])=>{lines.push(`<span class="p">${esc(p)}</span>${esc(c)}`);o.forEach(x=>lines.push(`<span class="o">${x}</span>`))});paint()}else run()}
+
+/* ================= Carrousel ================= */
+const car=$('car'),cards=[...car.children],dots=[...$('dots').children];
+const cur=()=>{const mid=car.scrollLeft+car.clientWidth/2;let best=0,bd=1e9;cards.forEach((c,i)=>{const d=Math.abs(c.offsetLeft-car.offsetLeft+c.offsetWidth/2-mid);if(d<bd){bd=d;best=i}});return best};
+const upd=()=>{const i=cur();$('count').textContent=`${i+1} / ${cards.length}`;dots.forEach((d,j)=>d.classList.toggle('on',j===i));cards.forEach((c,j)=>{c.classList.toggle('dim',j!==i);c.style.setProperty('--ry',(j<i?14:-14)+'deg')})};
+const to=i=>{i=(i+cards.length)%cards.length;const c=cards[i];car.scrollTo({left:c.offsetLeft-car.offsetLeft-(car.clientWidth-c.offsetWidth)/2,behavior:RM?'auto':'smooth'})};
+$('prev').onclick=()=>to(cur()-1);$('next').onclick=()=>to(cur()+1);
+dots.forEach(d=>d.onclick=()=>to(+d.dataset.i));
+car.addEventListener('scroll',upd,{passive:true});
+car.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();to(cur()+1)}if(e.key==='ArrowLeft'){e.preventDefault();to(cur()-1)}});
+
+/* ================= Routeur : show() est la seule entrée ================= */
+const PAGES=['accueil','introduction','epreuves','ateliers-pro','veille-tech'];
+const links=[...$('tabs').querySelectorAll('a')],pill=$('pill'),wipe=$('wipe');
+const movePill=a=>{pill.style.left=a.offsetLeft+'px';pill.style.width=a.offsetWidth+'px'};
+let target=null,first=true;
+const show=()=>{
+const h=location.hash.slice(1),page=PAGES.includes(h)?h:'accueil';
+if(!first&&!RM){wipe.classList.remove('go');void wipe.offsetWidth;wipe.classList.add('go')}
+document.querySelectorAll('.view').forEach(v=>{const on=v.id==='v-'+page;if(on&&!v.classList.contains('on')){v.querySelectorAll('.rv,.tl').forEach(el=>el.classList.remove('in'));v.classList.add('on');requestAnimationFrame(()=>watch(v))}else if(!on)v.classList.remove('on')});
+links.forEach(a=>{const on=a.hash==='#'+page;on?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current');if(on){movePill(a);a.scrollIntoView({block:'nearest',inline:'nearest'})}});
+if(target){const el=$('p-'+target);target=null;setTimeout(()=>{el.classList.add('in');el.scrollIntoView({block:'center',behavior:RM?'auto':'smooth'});el.classList.add('hi');setTimeout(()=>el.classList.remove('hi'),2600)},450)}else window.scrollTo(0,0);
+if(page==='ateliers-pro')requestAnimationFrame(()=>{if(!target)car.scrollLeft=0;upd()});
+if(page==='accueil')requestAnimationFrame(draw);
+first=false;
+};
+addEventListener('hashchange',show);
+addEventListener('resize',()=>{const a=links.find(x=>x.hasAttribute('aria-current'));if(a)movePill(a)});
+const openProject=id=>{target=id;if(location.hash==='#ateliers-pro')show();else location.hash='ateliers-pro'};
+
+/* ================= Plan du lab (Accueil) ================= */
+const N=[
+{k:'net',n:'Internet',s:'WAN',x:0,y:.5,w:'t',m:'r'},
+{k:'pf',n:'pfSense',s:'Pare-feu',x:.2,y:.5,w:'b',m:'r',p:'pf'},
+{k:'sw',n:'Switch',s:'VLAN',x:.4,y:.5,w:'b',m:'r'},
+{k:'ad',n:'Windows Server',s:'AD · DNS · DHCP',x:.6,y:0,w:'t',m:'r',p:'ad'},
+{k:'deb',n:'Debian',s:'Apache · DNS',x:1,y:0,w:'t',m:'r',p:'dns'},
+{k:'pc',n:'Postes',s:'GPO',x:.6,y:1,w:'b',m:'l',p:'ad'},
+{k:'dock',n:'Docker',s:'À venir',x:1,y:1,w:'b',m:'l',p:'dock'}];
+const R=[['net','pf','sw'],['sw','bt','ad','deb'],['sw','bb','pc','dock']];
+const RC=['#ff5a5f','#3b82ff','#2ee59d'];
+const s=$('map');
+const draw=()=>{
+const W2=s.clientWidth,H2=s.clientHeight;if(!W2)return;
+const nar=W2<460,mx=nar?44:48,mt=nar?40:62,mb=nar?40:62,P={};
+N.forEach(n=>{const fx=nar?n.y:n.x,fy=nar?n.x:n.y;P[n.k]=[mx+fx*(W2-2*mx),mt+fy*(H2-mt-mb)]});
+const sw=P.sw,b=t=>nar?[t[0],sw[1]+Math.min(Math.abs(t[0]-sw[0]),(t[1]-sw[1])*.6)]:[sw[0]+Math.min(Math.abs(t[1]-sw[1]),(t[0]-sw[0])*.6),t[1]];
+P.bt=b(P.ad);P.bb=b(P.pc);
+const d=r=>'M'+r.map(k=>P[k].map(v=>v.toFixed(1)).join(',')).join(' L');
+const lines=R.map((r,i)=>`<path d="${d(r)}" fill="none" stroke="${RC[i]}" stroke-opacity=".25" stroke-width="16" stroke-linejoin="round" stroke-linecap="round"/><path d="${d(r)}" fill="none" stroke="${RC[i]}" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>`).join('');
+const pkt=RM?'':R.flatMap((r,i)=>[0,1,2].map(j=>`<circle r="4.5" fill="#fff"><animateMotion dur="${2.6+i*.5}s" begin="${j*.9+i*.3}s" repeatCount="indefinite" path="${d(r)}"/></circle>`)).join('');
+const st=N.map(n=>{const [x,y]=P[n.k],side=nar?n.m:n.w;let tx=x,ty=y,a='middle';
+if(side==='b')ty=y+34;if(side==='t')ty=y-32;if(side==='r'){tx=x+22;a='start';ty=y-2}if(side==='l'){tx=x-22;a='end';ty=y-2}
+if(!nar&&n.k==='net'){a='start';tx=x-12}
+if(!nar&&['deb','dock'].includes(n.k)){a='end';tx=x+12}
+if(!nar&&['pf','sw'].includes(n.k)){a='end';tx=x+10}
+if(nar&&n.k==='sw')ty-=22;
+const big=['pf','sw'].includes(n.k);
+return `<g class="st" ${n.p?`tabindex="0" role="link" data-p="${n.p}" aria-label="${n.n} : voir le projet"`:''}>${n.p?`<circle class="halo" cx="${x}" cy="${y}" r="10" fill="none" stroke="#22d3ee" stroke-width="2"/>`:''}<circle class="o" cx="${x}" cy="${y}" r="${big?13:10}" fill="#0a1222" stroke="#fff" stroke-width="${big?5:4}"/>${n.p?`<circle cx="${x}" cy="${y}" r="3.5" fill="#ffb400"/>`:''}<text x="${tx}" y="${ty}" text-anchor="${a}">${n.n}</text><text class="sub" x="${tx}" y="${ty+17}" text-anchor="${a}">${n.s}</text></g>`}).join('');
+s.innerHTML=lines+pkt+st;
+s.querySelectorAll('[data-p]').forEach(g=>{g.addEventListener('click',()=>openProject(g.dataset.p));g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openProject(g.dataset.p)}})});
+};
+const ro=new ResizeObserver(draw);ro.observe(s);
+
+show();
+if(document.fonts)document.fonts.ready.then(()=>{const a=links.find(x=>x.hasAttribute('aria-current'));if(a)movePill(a)});
+}
+</script>
+</body>
+</html>

@@ -192,10 +192,13 @@ footer{border-top:7px solid transparent;border-image:repeating-linear-gradient(9
 .vis{background:linear-gradient(90deg,#004d98,#a50044,#004d98);border-block:3px solid #edbb00;padding:16px 0;mask-image:none;-webkit-mask-image:none}
 .vis span{font-size:36px;font-weight:900;letter-spacing:.05em;color:#edbb00}.vis span:nth-child(even){color:#fff}.vis span::after{background:#fff}
 .cf{position:fixed;z-index:300;width:10px;height:16px;pointer-events:none;border-radius:2px}
+.legends{position:fixed;inset:0;z-index:-2;pointer-events:none;display:flex;justify-content:space-evenly;align-items:flex-start;padding-top:14vh}
+.legends b{position:relative;font:900 21vw/1 Inter,sans-serif;color:transparent;-webkit-text-stroke:3px #ffffff26}
+.legends small{position:absolute;left:50%;top:-1vw;transform:translateX(-50%);font:900 2vw Inter,sans-serif;letter-spacing:.35em;color:#edbb00a0;-webkit-text-stroke:0}
 </style>
 </head>
 <body>
-<div class="stripes"></div><div class="pitch"></div><div class="mega">VISCA BARÇA</div><div class="aurora"></div><canvas id="net" aria-hidden="true"></canvas><div class="grain"></div><div id="glow"></div><div id="wipe"></div>
+<div class="stripes"></div><div class="pitch"></div><div class="legends" aria-hidden="true"><b>8<small>PEDRI</small></b><b>10<small>MESSI</small></b><b>19<small>YAMAL</small></b></div><div class="mega">VISCA BARÇA</div><div class="aurora"></div><canvas id="net" aria-hidden="true"></canvas><div class="grain"></div><div id="glow"></div><div id="wipe"></div>
 
 <nav><div class="in">
 <a class="logo" href="#accueil"><i></i><span>Omar Ouerfelli</span></a>
